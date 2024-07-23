@@ -72,7 +72,8 @@
 
 <script>
 // Fetch the filtered JSON data
-fetch('../filtered_data.json')
+//fetch('../filtered_data.json')
+fetch('../airtable_metadata.json')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok: ' + response.statusText);
