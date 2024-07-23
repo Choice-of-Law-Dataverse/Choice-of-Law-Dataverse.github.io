@@ -90,6 +90,7 @@ const tablesMap = new Map();
 
 function fetchData() {
     const dataSource = filterCheckbox.checked ? '../filtered_data.json' : '../airtable_metadata.json';
+
     // Store the currently selected table
     const selectedTable = tableSelect.value;
 
@@ -169,7 +170,7 @@ function fetchData() {
                 tableSelect.appendChild(option);
             });
 
-            // Set the previously selected table if it exists
+            // Set the previously selected table if it exists, otherwise select the first table
             if (selectedTable && tablesMap.has(selectedTable)) {
                 tableSelect.value = selectedTable;
             } else if (tableSelect.options.length > 0) {
@@ -179,33 +180,29 @@ function fetchData() {
             // Trigger change event to show the selected table
             tableSelect.dispatchEvent(new Event('change'));
 
-            // Event listener for table selection
-            tableSelect.addEventListener('change', (event) => {
-                const selectedTable = event.target.value;
-                tablesContainer.querySelectorAll('.table-container').forEach(container => {
-                    container.style.display = 'none'; // Hide all tables
-                });
-                if (tablesMap.has(selectedTable)) {
-                    tablesMap.get(selectedTable).style.display = 'block'; // Show selected table
-                }
-            });
-
-            // Show the first table by default
-            //if (tableSelect.options.length > 0) {
-                //tableSelect.value = tableSelect.options[0].value;
-                //tableSelect.dispatchEvent(new Event('change'));
-            //}
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
 }
 
+// Event listener for table selection
+tableSelect.addEventListener('change', (event) => {
+    const selectedTable = event.target.value;
+    tablesContainer.querySelectorAll('.table-container').forEach(container => {
+        container.style.display = 'none'; // Hide all tables
+    });
+    if (tablesMap.has(selectedTable)) {
+        tablesMap.get(selectedTable).style.display = 'block'; // Show selected table
+    }
+});
+
 // Initial fetch
 fetchData();
 
 // Add event listener for checkbox change
 filterCheckbox.addEventListener('change', fetchData);
+
 </script>
 
 </body>
