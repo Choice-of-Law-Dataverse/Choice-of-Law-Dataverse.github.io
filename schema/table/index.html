@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tables</title>
+    <style>
+        /* Importing Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding: 40px 80px 20px 80px;
+        }
+
+        h1 {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        th.sortable:hover {
+            cursor: pointer;
+        }
+        .table-container {
+            margin-bottom: 30px;
+        }
+        .table-header {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 1.8em;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .select-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CoLD BASE GUIDE</h1>
+
+<div class="select-container">
+    <label for="tableSelect">Select Table: </label>
+    <select id="tableSelect">
+        <!-- Options will be populated by JavaScript -->
+    </select>
+</div>
+
+<div id="tablesContainer">
+    <!-- Tables will be inserted here -->
+</div>
+
+<script>
+// Fetch the filtered JSON data
+fetch('../filtered_data.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (!data || data.length === 0) {
+            console.error('No data available or data is empty.');
+            return;
+        }
+
+        const tablesContainer = document.getElementById('tablesContainer');
+        const tableSelect = document.getElementById('tableSelect');
+        const tablesMap = new Map();
+
+        data.forEach((tableData, index) => {
+            const tableContainer = document.createElement('div');
+            tableContainer.classList.add('table-container');
+            tableContainer.style.display = 'none'; // Hide all tables initially
+
+            // Create and append table header
+            const tableHeader = document.createElement('div');
+            tableHeader.classList.add('table-header');
+            tableHeader.textContent = tableData.table;
+            tableContainer.appendChild(tableHeader);
+
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+
+            // Create table header
+            const headerRow = document.createElement('tr');
+            const headers = ['Field', 'Description', 'Type'];
+            headers.forEach(headerText => {
+                const th = document.createElement('th');
+                th.textContent = headerText;
+                th.classList.add('sortable');
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+
+            // Add table headers and rows
+            tableData.fields.forEach(field => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${field.field}</td>
+                    <td>${field.description}</td>
+                    <td>${field.type}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            tableContainer.appendChild(table);
+            tablesContainer.appendChild(tableContainer);
+
+            // Add table to the map
+            tablesMap.set(tableData.table, tableContainer);
+
+            // Populate the dropdown menu
+            const option = document.createElement('option');
+            option.value = tableData.table;
+            option.textContent = tableData.table;
+            tableSelect.appendChild(option);
+        });
+
+        // Event listener for table selection
+        tableSelect.addEventListener('change', (event) => {
+            const selectedTable = event.target.value;
+            tablesContainer.querySelectorAll('.table-container').forEach(container => {
+                container.style.display = 'none'; // Hide all tables
+            });
+            if (tablesMap.has(selectedTable)) {
+                tablesMap.get(selectedTable).style.display = 'block'; // Show selected table
+            }
+        });
+
+        // Show the first table by default
+        if (tableSelect.options.length > 0) {
+            tableSelect.value = tableSelect.options[0].value;
+            tableSelect.dispatchEvent(new Event('change'));
+        }
+
+        function sortTable(table, columnIndex) {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const sortedRows = rows.sort((a, b) => {
+                const aText = a.children[columnIndex].textContent;
+                const bText = b.children[columnIndex].textContent;
+                return aText.localeCompare(bText);
+            });
+            tbody.innerHTML = '';
+            sortedRows.forEach(row => tbody.appendChild(row));
+        }
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+</script>
+
+</body>
+</html>
