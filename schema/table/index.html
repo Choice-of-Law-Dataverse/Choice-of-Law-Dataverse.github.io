@@ -54,15 +54,22 @@
             margin-bottom: 50px;
             text-align: center;
         }
-        .select-container {
+        .select-container, .filter-container {
             margin-bottom: 20px;
-            text-align: center;
+            text-align: left;
         }
     </style>
 </head>
 <body>
 
 <h1>CoLD BASE GUIDE</h1>
+
+<div class="filter-container">
+    <label>
+        <input type="checkbox" id="filterCheckbox" checked>
+        Filter columns with no description
+    </label>
+</div>
 
 <div class="select-container">
     <label for="tableSelect">Select Table: </label>
@@ -76,119 +83,129 @@
 </div>
 
 <script>
-// Fetch the filtered JSON data
-//fetch('../filtered_data.json')
-fetch('../airtable_metadata.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok: ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (!data || data.length === 0) {
-            console.error('No data available or data is empty.');
-            return;
-        }
+const filterCheckbox = document.getElementById('filterCheckbox');
+const tableSelect = document.getElementById('tableSelect');
+const tablesContainer = document.getElementById('tablesContainer');
+const tablesMap = new Map();
 
-        const tablesContainer = document.getElementById('tablesContainer');
-        const tableSelect = document.getElementById('tableSelect');
-        const tablesMap = new Map();
+function fetchData() {
+    const dataSource = filterCheckbox.checked ? '../filtered_data.json' : '../airtable_metadata.json';
+    // Store the currently selected table
+    const selectedTable = tableSelect.value;
 
-        data.forEach((tableData, index) => {
-            const tableContainer = document.createElement('div');
-            tableContainer.classList.add('table-container');
-            tableContainer.style.display = 'none'; // Hide all tables initially
-
-            // Create and append table header
-            const tableHeader = document.createElement('div');
-            tableHeader.classList.add('table-header');
-            tableHeader.textContent = tableData.table;
-            tableContainer.appendChild(tableHeader);
-
-            // Create and append table description
-            const tableDescription = document.createElement('p');
-            tableDescription.classList.add('table-description');
-            tableDescription.textContent = tableData.description || 'No description available.';
-            tableContainer.appendChild(tableDescription);
-
-            const table = document.createElement('table');
-            const thead = document.createElement('thead');
-            const tbody = document.createElement('tbody');
-
-            // Create table header
-            const headerRow = document.createElement('tr');
-            const headers = ['Field', 'Description', 'Type'];
-            headers.forEach(headerText => {
-                const th = document.createElement('th');
-                th.textContent = headerText;
-                th.classList.add('sortable');
-                headerRow.appendChild(th);
-            });
-            thead.appendChild(headerRow);
-
-            // Add table description beneath the header
-            const descriptionRow = document.createElement('tr');
-
-
-            // Add table headers and rows
-            tableData.fields.forEach(field => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${field.field}</td>
-                    <td>${field.description}</td>
-                    <td>${field.type}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            table.appendChild(thead);
-            table.appendChild(tbody);
-            tableContainer.appendChild(table);
-            tablesContainer.appendChild(tableContainer);
-
-            // Add table to the map
-            tablesMap.set(tableData.table, tableContainer);
-
-            // Populate the dropdown menu
-            const option = document.createElement('option');
-            option.value = tableData.table;
-            option.textContent = tableData.table;
-            tableSelect.appendChild(option);
-        });
-
-        // Event listener for table selection
-        tableSelect.addEventListener('change', (event) => {
-            const selectedTable = event.target.value;
-            tablesContainer.querySelectorAll('.table-container').forEach(container => {
-                container.style.display = 'none'; // Hide all tables
-            });
-            if (tablesMap.has(selectedTable)) {
-                tablesMap.get(selectedTable).style.display = 'block'; // Show selected table
+    fetch(dataSource)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
             }
-        });
+            return response.json();
+        })
+        .then(data => {
+            if (!data || data.length === 0) {
+                console.error('No data available or data is empty.');
+                return;
+            }
 
-        // Show the first table by default
-        if (tableSelect.options.length > 0) {
-            tableSelect.value = tableSelect.options[0].value;
-            tableSelect.dispatchEvent(new Event('change'));
-        }
+            // Clear existing tables and dropdown options
+            tablesContainer.innerHTML = '';
+            tableSelect.innerHTML = '';
+            tablesMap.clear();
 
-        function sortTable(table, columnIndex) {
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-            const sortedRows = rows.sort((a, b) => {
-                const aText = a.children[columnIndex].textContent;
-                const bText = b.children[columnIndex].textContent;
-                return aText.localeCompare(bText);
+            data.forEach((tableData, index) => {
+                const tableContainer = document.createElement('div');
+                tableContainer.classList.add('table-container');
+                tableContainer.style.display = 'none'; // Hide all tables initially
+
+                // Create and append table header
+                const tableHeader = document.createElement('div');
+                tableHeader.classList.add('table-header');
+                tableHeader.textContent = tableData.table;
+                tableContainer.appendChild(tableHeader);
+
+                // Create and append table description
+                const tableDescription = document.createElement('p');
+                tableDescription.classList.add('table-description');
+                tableDescription.textContent = tableData.description || 'No description available.';
+                tableContainer.appendChild(tableDescription);
+
+                const table = document.createElement('table');
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+
+                // Create table header
+                const headerRow = document.createElement('tr');
+                const headers = ['Field', 'Description', 'Type'];
+                headers.forEach(headerText => {
+                    const th = document.createElement('th');
+                    th.textContent = headerText;
+                    th.classList.add('sortable');
+                    headerRow.appendChild(th);
+                });
+                thead.appendChild(headerRow);
+
+                // Add table headers and rows
+                tableData.fields.forEach(field => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${field.field}</td>
+                        <td>${field.description}</td>
+                        <td>${field.type}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                table.appendChild(thead);
+                table.appendChild(tbody);
+                tableContainer.appendChild(table);
+                tablesContainer.appendChild(tableContainer);
+
+                // Add table to the map
+                tablesMap.set(tableData.table, tableContainer);
+
+                // Populate the dropdown menu
+                const option = document.createElement('option');
+                option.value = tableData.table;
+                option.textContent = tableData.table;
+                tableSelect.appendChild(option);
             });
-            tbody.innerHTML = '';
-            sortedRows.forEach(row => tbody.appendChild(row));
-        }
-    })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-    });
+
+            // Set the previously selected table if it exists
+            if (selectedTable && tablesMap.has(selectedTable)) {
+                tableSelect.value = selectedTable;
+            } else if (tableSelect.options.length > 0) {
+                tableSelect.value = tableSelect.options[0].value;
+            }
+
+            // Trigger change event to show the selected table
+            tableSelect.dispatchEvent(new Event('change'));
+
+            // Event listener for table selection
+            tableSelect.addEventListener('change', (event) => {
+                const selectedTable = event.target.value;
+                tablesContainer.querySelectorAll('.table-container').forEach(container => {
+                    container.style.display = 'none'; // Hide all tables
+                });
+                if (tablesMap.has(selectedTable)) {
+                    tablesMap.get(selectedTable).style.display = 'block'; // Show selected table
+                }
+            });
+
+            // Show the first table by default
+            //if (tableSelect.options.length > 0) {
+                //tableSelect.value = tableSelect.options[0].value;
+                //tableSelect.dispatchEvent(new Event('change'));
+            //}
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+// Initial fetch
+fetchData();
+
+// Add event listener for checkbox change
+filterCheckbox.addEventListener('change', fetchData);
 </script>
 
 </body>
