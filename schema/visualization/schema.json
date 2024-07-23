@@ -1,0 +1,38 @@
+{
+    "users": {
+        "description": "Table containing user information.",
+        "columns": {
+            "id": "Unique identifier for each user.",
+            "username": "Username chosen by the user.",
+            "email": "Email address of the user.",
+            "created_at": "Timestamp when the user was created."
+        }
+    },
+    "posts": {
+        "description": "Table containing posts created by users.",
+        "columns": {
+            "id": "Unique identifier for each post.",
+            "user_id": "Identifier of the user who created the post.",
+            "title": "Title of the post.",
+            "content": "Content of the post.",
+            "created_at": "Timestamp when the post was created."
+        },
+        "connections": [
+            { "from": "posts.user_id", "to": "users.id" }
+        ]
+    },
+    "comments": {
+        "description": "Table containing comments on posts.",
+        "columns": {
+            "id": "Unique identifier for each comment.",
+            "post_id": "Identifier of the post the comment belongs to.",
+            "user_id": "Identifier of the user who made the comment.",
+            "content": "Content of the comment.",
+            "created_at": "Timestamp when the comment was created."
+        },
+        "connections": [
+            { "from": "post_id", "to": "posts.id" },
+            { "from": "user_id", "to": "users.id" }
+        ]
+    }
+}
