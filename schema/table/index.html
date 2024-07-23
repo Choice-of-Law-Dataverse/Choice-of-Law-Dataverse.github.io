@@ -11,13 +11,13 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            padding: 40px 80px 20px 80px;
+            padding: 20px 80px 20px 80px;
         }
 
         h1 {
             font-family: 'Roboto Condensed', sans-serif;
             font-size: 2.5em;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
             text-align: left;
         }
 
@@ -47,6 +47,11 @@
             font-size: 1.8em;
             margin-top: 50px;
             margin-bottom: 25px;
+            text-align: center;
+        }
+        .table-description {
+            /*font-style: italic;*/
+            margin-bottom: 50px;
             text-align: center;
         }
         .select-container {
@@ -101,6 +106,12 @@ fetch('../airtable_metadata.json')
             tableHeader.textContent = tableData.table;
             tableContainer.appendChild(tableHeader);
 
+            // Create and append table description
+            const tableDescription = document.createElement('p');
+            tableDescription.classList.add('table-description');
+            tableDescription.textContent = tableData.description || 'No description available.';
+            tableContainer.appendChild(tableDescription);
+
             const table = document.createElement('table');
             const thead = document.createElement('thead');
             const tbody = document.createElement('tbody');
@@ -115,6 +126,10 @@ fetch('../airtable_metadata.json')
                 headerRow.appendChild(th);
             });
             thead.appendChild(headerRow);
+
+            // Add table description beneath the header
+            const descriptionRow = document.createElement('tr');
+
 
             // Add table headers and rows
             tableData.fields.forEach(field => {
