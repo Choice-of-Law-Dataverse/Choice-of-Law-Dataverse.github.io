@@ -147,7 +147,12 @@
             },
             {
                 "field": "Region",
-                "description": "More comprehensive regional classification according to the purposes of this research project",
+                "description": "Comprehensive regional classification according to the purposes of this research project. Asia & Pacific and South & Latin America are consolidated regions.",
+                "type": "singleSelect"
+            },
+            {
+                "field": "North/South divide",
+                "description": "The Global North does not refer to a geographic region in any traditional sense but rather to the relative power and wealth of countries in distinct parts of the world. The Global North includes many countries in the Northern Hemisphere and also some, such as Australia and New Zealand, that are located in the Southern Hemisphere. The Global South includes many countries in the southern hemisphere and some in the northern hemisphere. (see L. Braff and K. Nelson, The Global North: Introducing the region, in Gendered Lives, State University of New York, 2022).",
                 "type": "singleSelect"
             },
             {
@@ -157,7 +162,7 @@
             },
             {
                 "field": "Irrelevant?",
-                "description": "Jurisdictions that will never be filled out",
+                "description": "Internal field to indicate jurisdictions that will never be filled out",
                 "type": "checkbox"
             }
         ]
@@ -289,31 +294,6 @@
                 "type": "multilineText"
             },
             {
-                "field": "Relevant rules of law involved",
-                "description": "The relevant legal provisions that are related to the choice of law from the choice of law issue(s)/agreement/clause/interpretation(s). This field might also include important precedents or other decisions that were used as a reference in the judgment. ",
-                "type": "multilineText"
-            },
-            {
-                "field": "Choice of law issue",
-                "description": "Questions arising from the choice of law issue(s)/agreement/clause/interpretation(s)",
-                "type": "multilineText"
-            },
-            {
-                "field": "Court's position",
-                "description": "The opinion of the court in regard to the statements made in the \"Choice of law issue\" column.",
-                "type": "multilineText"
-            },
-            {
-                "field": "Translated excerpt",
-                "description": "English translation of the \"Quote\" column (relevant excerpt of the decision)",
-                "type": "multilineText"
-            },
-            {
-                "field": "Text of the relevant legal provisions",
-                "description": "Full text of the relevant rules involved. Also found in the \"Answers\" tab with further elaboration of the legal provision.",
-                "type": "multilineText"
-            },
-            {
                 "field": "Content",
                 "description": "Text transcription if possible (SW)",
                 "type": "multilineText"
@@ -339,6 +319,41 @@
                 "type": "singleLineText"
             },
             {
+                "field": "Relevant facts",
+                "description": "A short summary of the facts of the case (who are the parties, what happened, what is the dispute about, the different stages of court proceedings, etc.). This field prioritizes information on choice of law.",
+                "type": "multilineText"
+            },
+            {
+                "field": "Relevant rules of law involved",
+                "description": "The relevant legal provisions that are related to the choice of law from the choice of law issue(s)/agreement/clause/interpretation(s). This field might also include important precedents or other decisions that were used as a reference in the judgment. ",
+                "type": "multilineText"
+            },
+            {
+                "field": "Choice of law issue",
+                "description": "Questions arising from the choice of law issue(s)/agreement/clause/interpretation(s)",
+                "type": "multilineText"
+            },
+            {
+                "field": "Court's position",
+                "description": "The opinion of the court in regard to the statements made in the \"Choice of law issue\" column.",
+                "type": "multilineText"
+            },
+            {
+                "field": "Text of the relevant legal provisions",
+                "description": "Full text of the relevant rules involved. Also found in the \"Answers\" tab with further elaboration of the legal provision.",
+                "type": "multilineText"
+            },
+            {
+                "field": "Quote",
+                "description": "Excerpt of the decision where the court justifies its position (judgment). The quote is always in the original language of the case/in the words of the court.",
+                "type": "multilineText"
+            },
+            {
+                "field": "Translated excerpt",
+                "description": "English translation of the \"Quote\" column (relevant excerpt of the decision)",
+                "type": "multilineText"
+            },
+            {
                 "field": "Questions",
                 "description": "Questions corresponding to the Answers connected to this case (manually selected)",
                 "type": "multipleRecordLinks"
@@ -349,14 +364,9 @@
                 "type": "singleLineText"
             },
             {
-                "field": "Quote",
-                "description": "Excerpt of the decision where the court justifies its position (judgment). The quote is always in the original language of the case/in the words of the court.",
-                "type": "multilineText"
-            },
-            {
-                "field": "Relevant facts",
-                "description": "A short summary of the facts of the case (who are the parties, what happened, what is the dispute about, the different stages of court proceedings, etc.). This field prioritizes information on choice of law.",
-                "type": "multilineText"
+                "field": "Copyright issues",
+                "description": "Internal field to indicate that the PDF file cannot be publicly shared",
+                "type": "checkbox"
             },
             {
                 "field": "Arbitral awards",
@@ -448,12 +458,17 @@
             },
             {
                 "field": "Context",
-                "description": "A short summary of the facts of the case (who are the parties, what happened, what is the dispute about, etc.). This field prioritizes information on choice of law.",
+                "description": "A short summary of the facts of the case (who are the parties, what happened, what is the dispute about, etc.). ",
                 "type": "multilineText"
             },
             {
                 "field": "Seat (Town)",
                 "description": "If the award is contested, it will be referred to the courts of this jurisdiction",
+                "type": "multilineText"
+            },
+            {
+                "field": "Award summary",
+                "description": "Brief summary of the determination of the applicable law, including composition of the arbitral tribunal",
                 "type": "multilineText"
             }
         ]
@@ -473,8 +488,8 @@
         "description": "Key terms related choice of law",
         "fields": [
             {
-                "field": "Concept",
-                "description": "Keywords or expressions",
+                "field": "Keywords",
+                "description": "Keywords or expressions related to a concept included in the HCCH Principles",
                 "type": "singleLineText"
             },
             {
