@@ -89,7 +89,7 @@ const tablesContainer = document.getElementById('tablesContainer');
 const tablesMap = new Map();
 
 function fetchData() {
-    const dataSource = filterCheckbox.checked ? '../filtered_data.json' : '../airtable_metadata.json';
+    const dataSource = filterCheckbox.checked ? '../airtable_info_filtered.json' : '../airtable_info.json';
 
     // Store the currently selected table
     const selectedTable = tableSelect.value;
