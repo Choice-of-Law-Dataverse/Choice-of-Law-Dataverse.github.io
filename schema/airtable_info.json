@@ -137,6 +137,11 @@
                 "field": "OUP Book Quotation",
                 "description": "No description",
                 "type": "multilineText"
+            },
+            {
+                "field": "data type sample",
+                "description": "No description",
+                "type": "multipleRecordLinks"
             }
         ]
     },
@@ -609,13 +614,13 @@
                 "type": "singleLineText"
             },
             {
-                "field": "Relevant facts",
+                "field": "Relevant facts / Summary of the case",
                 "description": "A short summary of the facts of the case (who are the parties, what happened, what is the dispute about, the different stages of court proceedings, etc.). This field prioritizes information on choice of law.",
                 "type": "multilineText"
             },
             {
                 "field": "Relevant rules of law involved",
-                "description": "The relevant legal provisions that are related to the choice of law from the choice of law issue(s)/agreement/clause/interpretation(s). This field might also include important precedents or other decisions that were used as a reference in the judgment. ",
+                "description": "The relevant legal provisions that are related to choice of law from the choice of law issue(s)/agreement/clause/interpretation(s). This field might also include important precedents or other decisions that were used as a reference in the judgment. ",
                 "type": "multilineText"
             },
             {
@@ -682,6 +687,21 @@
                 "field": "Case rank",
                 "description": "Evaluation of court decisions and assignment of a rank from1-10 with 1 being completely unrelated/ unimportant and 10 being of indispensable importance.",
                 "type": "singleLineText"
+            },
+            {
+                "field": "Pinpoint facts",
+                "description": "Reference to verify the data on facts (summary)",
+                "type": "multilineText"
+            },
+            {
+                "field": "Pinpoint rules",
+                "description": "Reference to verify the data on rules of law",
+                "type": "multilineText"
+            },
+            {
+                "field": "Pinpoint CoL",
+                "description": "Reference to verify the data on choice of law issue",
+                "type": "multilineText"
             }
         ]
     },
@@ -1065,6 +1085,147 @@
                 "field": "Legal provisions",
                 "description": "No description",
                 "type": "multipleRecordLinks"
+            }
+        ]
+    },
+    {
+        "table": "data type sample",
+        "description": "this is a test to see what airtable data formats look like",
+        "fields": [
+            {
+                "field": "Single line text",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Long text",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "User",
+                "description": "No description",
+                "type": "singleCollaborator"
+            },
+            {
+                "field": "Single select",
+                "description": "No description",
+                "type": "singleSelect"
+            },
+            {
+                "field": "Link to another record",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Attachment",
+                "description": "No description",
+                "type": "multipleAttachments"
+            },
+            {
+                "field": "Checkbox",
+                "description": "No description",
+                "type": "checkbox"
+            },
+            {
+                "field": "Multiple select",
+                "description": "No description",
+                "type": "multipleSelects"
+            },
+            {
+                "field": "Date",
+                "description": "No description",
+                "type": "date"
+            },
+            {
+                "field": "Phone number",
+                "description": "No description",
+                "type": "phoneNumber"
+            },
+            {
+                "field": "Email",
+                "description": "No description",
+                "type": "email"
+            },
+            {
+                "field": "URL",
+                "description": "No description",
+                "type": "url"
+            },
+            {
+                "field": "Number",
+                "description": "No description",
+                "type": "number"
+            },
+            {
+                "field": "Currency",
+                "description": "No description",
+                "type": "currency"
+            },
+            {
+                "field": "Percent",
+                "description": "No description",
+                "type": "percent"
+            },
+            {
+                "field": "Duration",
+                "description": "No description",
+                "type": "duration"
+            },
+            {
+                "field": "Rating",
+                "description": "No description",
+                "type": "rating"
+            },
+            {
+                "field": "Formula",
+                "description": "No description",
+                "type": "formula"
+            },
+            {
+                "field": "Rollup",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "Count",
+                "description": "No description",
+                "type": "count"
+            },
+            {
+                "field": "Answer (from Link to another record)",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Created",
+                "description": "No description",
+                "type": "createdTime"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Created By",
+                "description": "No description",
+                "type": "createdBy"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "Autonumber",
+                "description": "No description",
+                "type": "autoNumber"
+            },
+            {
+                "field": "Barcode",
+                "description": "No description",
+                "type": "barcode"
             }
         ]
     }
