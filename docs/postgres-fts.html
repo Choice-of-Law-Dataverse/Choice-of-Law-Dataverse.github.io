@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Postgres FTS</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="postgresql-full-text-search">PostgreSQL Full Text Search</h1>
+<p>PostgreSQL, also called Postgres, is a relational database. Relational database means, that data is stored in a structured format, representing tables and columns.
+Postgres has an integrated feature called &quot;Full Text Search&quot;, which allows to query the database and the data entries stored within by using textual queries (as opposed to using Structured Query Language (SQL), which has sophisticated methods of querying databases that are just as manifold in what can be achieved with them as they are complex in handling).</p>
+<h2 id="general-functionality">General functionality</h2>
+<p>The Postgres Full Text Search works by comparing an input document (textual user query) with the data found in the database. It is unfeasible to use the raw data as it would be found in the database directly. Instead, the individual entries from a database table have to be translated into a list of documents. The following preparation steps make it possible to use the Postgres Full Text Search feature:</p>
+<ol>
+<li><strong>creating searchable documents</strong></li>
+</ol>
+<p>Take every row of a table you want to search. Each of these rows has to be turned into a searchable document. To make a row searchable, you first select the columns you deem fit for including their entries in the searchable content. Then, you transform the text into a list of tokens, more specifically: lexemes (basically word stems). This list of lexemes has been cleaned for stop words and each lexeme is complemented with its position in the original text. Imagine you had a sentence <em>&quot;The court has decided on party autonomy and arbitration in Switzerland.&quot;</em>. This sentence would be transformed into a list that looks like this: <em>'arbitr':9 'autonomi':7 'court':2 'decid':4 'parti':6 'switzerland':11</em></p>
+<ol start="2">
+<li><strong>parsing textual user queries</strong></li>
+</ol>
+<p>This list can now be used for comparison. To compare it with a textual user query, each query will have to undergo a transformation process similar as in step 1. Searching for <em>&quot;court decision on party autonomy&quot;</em> would thus be turned into <em>'court' &amp; 'decis' &amp; 'parti' &amp; 'autonomi'</em>. Note that for user queries, the position of words within the original text is not stored.</p>
+<ol start="3">
+<li><strong>matching documents with queries</strong></li>
+</ol>
+<p>Finally, we can match the transformed query with all searchable documents in list form available and return whether there is infact a match or not. For some further granularity, we can score each comparison by measuring how relevant each document is to the query.
+Following the previous examples, matching and ranking the query from step 2 with the searchable document from step 1, returns a ranking score of <em>0.25948015</em>.</p>
+<h2 id="implementation-in-cold">Implementation in CoLD</h2>
+<p>The way in which the Postgres Full Text Search feature has been implemented is by enabling Full Text Search for multiple tables in order to search each of them with the same query. The Full Text Search then returns a joint list of results with data entries from all searched tables in order of how well their ranking score matches the textual user query.
+Here I am providing an overview for which columns have been selected with which priority for the tables that can be searched using the full text feature. Note that each column to be included for text search can be weighted using weights (A, B, C, D), with A being the highest and D the lowest weight.</p>
+<ol>
+<li><strong>&quot;Answers&quot; table</strong></li>
+</ol>
+<ul>
+<li>Questions (A)</li>
+<li>Name (from Jurisdiction) (A)</li>
+<li>More information (B)</li>
+<li>Themes (C)</li>
+</ul>
+<ol start="2">
+<li><strong>&quot;Court decisions&quot; table</strong></li>
+</ol>
+<ul>
+<li>Case (A)</li>
+<li>Jurisdiction Names (A)</li>
+<li>English translation (B)</li>
+<li>Additional information (C)</li>
+</ul>
+<ol start="3">
+<li><strong>&quot;Legislation&quot; table</strong></li>
+</ol>
+<ul>
+<li>Title (in English) (A)</li>
+<li>Official title (A)</li>
+<li>Jurisdiction name (B)</li>
+<li>Publication date (B)</li>
+<li>Entry into force (B)</li>
+<li>Full text of the provisions (C)</li>
+<li>Full text original (from Legal provisions) (C)</li>
+<li>Full text english (from Legal provisions) (C)</li>
+</ul>
+<p>For every row in each table, the respective combination of the values from all specified columns becomes one searchable document. For each table, the match between search query and searchable documents is made separately. Once the matches and ranks are calculated for each table, they are joined into one list. This list is the final result of the search results.</p>
+
+</body>
+</html>
