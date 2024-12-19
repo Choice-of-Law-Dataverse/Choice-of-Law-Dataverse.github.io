@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Welcome to CoLD Explanations and Docuemtnations on CoLD Explanations and Documentations</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Welcome to CoLD Explanations and Docuemtnations on CoLD Explanations and Documentations</description>
+    <generator>Hugo -- 0.140.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Dec 2024 15:24:07 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deployment</title>
+      <link>http://localhost:1313/topics/technology/deployment/</link>
+      <pubDate>Thu, 19 Dec 2024 15:24:07 +0100</pubDate>
+      <guid>http://localhost:1313/topics/technology/deployment/</guid>
+      <description>&lt;h1 id=&#34;multi-container-deployment-on-kubernetes&#34;&gt;Multi Container Deployment on Kubernetes&lt;/h1&gt;
+&lt;p&gt;Kubernetes is an open-source container orchestration platform. It can be used to automate the deployment, scaling, and management of containerized applications.&lt;/p&gt;
+&lt;h2 id=&#34;key-concepts&#34;&gt;Key Concepts&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Pods&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The smallest deployable unit in Kubernetes.&lt;/li&gt;
+&lt;li&gt;A Pod can host multiple containers that share networking and storage resources.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Nodes&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Physical or virtual machines that run Pods.&lt;/li&gt;
+&lt;li&gt;Components:
+&lt;ul&gt;
+&lt;li&gt;kubelet: Ensures containers are running in Pods.&lt;/li&gt;
+&lt;li&gt;kube-proxy: Manages networking and load balancing.&lt;/li&gt;
+&lt;li&gt;Container Runtime: Software responsible for running containers (e.g., Docker, containerd).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Control Plane&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fullstack</title>
+      <link>http://localhost:1313/topics/technology/fullstack/</link>
+      <pubDate>Thu, 19 Dec 2024 15:24:00 +0100</pubDate>
+      <guid>http://localhost:1313/topics/technology/fullstack/</guid>
+      <description>&lt;h1 id=&#34;how-full-stack-applications-actually-work&#34;&gt;How Full Stack Applications Actually Work&lt;/h1&gt;
+&lt;p&gt;Full stack applications are the backbone of modern digital experiences. They power websites, mobile apps, and online services just alike.&lt;/p&gt;
+&lt;p&gt;The term &amp;ldquo;full stack&amp;rdquo; encompasses both frontend (user-facing) and backend (server-side) components.&lt;/p&gt;
+&lt;p&gt;It is important to understand how these components interact with each other to create seamless, functional applications.&lt;/p&gt;
+&lt;h2 id=&#34;components&#34;&gt;Components&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Frontend
+The visible part users interact with is called the frontend. It is usually built using a combination of HTML, CSS, and JavaScript. Writing a whole frontend using just these languages in their raw form would be quite tedious, which is why there are plenty frameworks that have been developed on top of them. To build the Choice of Law Dataverse we use Vue.js, which is a framework built on top of JavaScript.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
