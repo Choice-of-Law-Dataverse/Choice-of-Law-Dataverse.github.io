@@ -1,0 +1,16 @@
+baseURL = "https://example.com/"
+languageCode = "en-us"
+title = "CoLD Explanations and Documentations"
+theme = "PaperMod"
+
+[params]
+  # Try removing or hiding dates in the theme’s configuration if supported
+  disableRSS = true
+  disableBreadcrumb = true
+  # PaperMod specific params:
+  disableDate = true
+
+[Taxonomies]
+  category = "categories"
+  tag = "tags"
+  topic = "topics"
