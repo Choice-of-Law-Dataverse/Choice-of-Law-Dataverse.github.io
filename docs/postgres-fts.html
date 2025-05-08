@@ -133,7 +133,7 @@ h1 {
 	border-bottom-style: solid;
 }
 
-h1, h2, h3 {
+h1, h2 {
 	font-weight: normal;
 }
 
@@ -365,63 +365,72 @@ code {
           : 'default'
     });
   </script>
-<h1 id="postgresql-full-text-search">PostgreSQL Full Text Search</h1>
-<p>PostgreSQL, also called Postgres, is a relational database. Relational database means, that data is stored in a structured format, representing tables and columns.
-Postgres has an integrated feature called &quot;Full Text Search&quot;, which allows to query the database and the data entries stored within by using textual queries (as opposed to using Structured Query Language (SQL), which has sophisticated methods of querying databases that are just as manifold in what can be achieved with them as they are complex in handling).</p>
-<h2 id="general-functionality">General functionality</h2>
+<h1 id="postgresql-full-text-search">How the Search Works</h1>
+<p>PostgreSQL, also called Postgres, is a relational database. Relational database means, that data is stored in a structured format, representing tables and columns.<br>
+Postgres has an integrated feature called "Full Text Search", which allows to query the database and the data entries stored within by using textual queries (as opposed to using Structured Query Language (SQL), which has sophisticated methods of querying databases that are just as manifold in what can be achieved with them as they are complex in handling).</p>
+  
+<h2>General Functionality</h2>
 <p>The Postgres Full Text Search works by comparing an input document (textual user query) with the data found in the database. It is unfeasible to use the raw data as it would be found in the database directly. Instead, the individual entries from a database table have to be translated into a list of documents. The following preparation steps make it possible to use the Postgres Full Text Search feature:</p>
+  
 <ol>
-<li><strong>creating searchable documents</strong></li>
+<li><b>Creating Searchable Documents</b><br>
+Take every row of a table you want to search. Each of these rows has to be turned into a searchable document. To make a row searchable, you first select the columns you deem fit for including their entries in the searchable content. Then, you transform the text into a list of tokens, more specifically: lexemes (basically word stems). This list of lexemes has been cleaned for stop words and each lexeme is complemented with its position in the original text. Imagine you had a sentence <i>"The court has decided on party autonomy and arbitration in Switzerland."</i>. This sentence would be transformed into a list that looks like this: <i>'arbitr':9 'autonomi':7 'court':2 'decid':4 'parti':6 'switzerland':11</i>
+<pre><code>SELECT to_tsvector('The court has decided on party autonomy and arbitration in Switzerland.');</code></pre>
+</li>
+<li><b>Parsing textual user queries</b><br>
+This list can now be used for comparison. To compare it with a textual user query, each query will have to undergo a transformation process similar as in step 1. Searching for <i>"court decision on party autonomy"</i> would thus be turned into <i>'court' &amp; 'decis' &amp; 'parti' &amp; 'autonomi'</i>. Note that for user queries, the position of words within the original text is not stored.
+<pre><code>SELECT to_tsquery('court &amp; decision &amp; on &amp; party &amp; autonomy');</code></pre>
+</li>
+<li><b>Matching Documents with Queries</b><br>
+Finally, we can match the transformed query with all searchable documents in list form available and return whether there is infact a match or not. For some further granularity, we can score each comparison by measuring how relevant each document is to the query.<br>
+Following the previous examples, matching and ranking the query from step 2 with the searchable document from step 1, returns a ranking score of <i>0.25948015</i>.<br>
+Simple comparison:
+<pre><code>SELECT to_tsquery('court &amp; decision &amp; on &amp; party &amp; autonomy') @@ to_tsvector('The court has decided on party autonomy and arbitration in Switzerland.');</code></pre>
+Ranking:
+<pre><code>SELECT
+	  ts_rank(
+		  to_tsvector('The court has decided on party autonomy and arbitration in Switzerland.'),
+		  to_tsquery('court &amp; decision &amp; on &amp; party &amp; autonomy')
+		  --to_tsquery('party &amp; autonomy')
+	  )
+</code></pre>
+</li>
 </ol>
-<p>Take every row of a table you want to search. Each of these rows has to be turned into a searchable document. To make a row searchable, you first select the columns you deem fit for including their entries in the searchable content. Then, you transform the text into a list of tokens, more specifically: lexemes (basically word stems). This list of lexemes has been cleaned for stop words and each lexeme is complemented with its position in the original text. Imagine you had a sentence <em>&quot;The court has decided on party autonomy and arbitration in Switzerland.&quot;</em>. This sentence would be transformed into a list that looks like this: <em>'arbitr':9 'autonomi':7 'court':2 'decid':4 'parti':6 'switzerland':11</em></p>
-<ol start="2">
-<li><strong>parsing textual user queries</strong></li>
-</ol>
-<p>This list can now be used for comparison. To compare it with a textual user query, each query will have to undergo a transformation process similar as in step 1. Searching for <em>&quot;court decision on party autonomy&quot;</em> would thus be turned into <em>'court' &amp; 'decis' &amp; 'parti' &amp; 'autonomi'</em>. Note that for user queries, the position of words within the original text is not stored.</p>
-<ol start="3">
-<li><strong>matching documents with queries</strong></li>
-</ol>
-<p>Finally, we can match the transformed query with all searchable documents in list form available and return whether there is infact a match or not. For some further granularity, we can score each comparison by measuring how relevant each document is to the query.
-Following the previous examples, matching and ranking the query from step 2 with the searchable document from step 1, returns a ranking score of <em>0.25948015</em>.</p>
-<h2 id="implementation-in-cold">Implementation in CoLD</h2>
-<p>The way in which the Postgres Full Text Search feature has been implemented is by enabling Full Text Search for multiple tables in order to search each of them with the same query. The Full Text Search then returns a joint list of results with data entries from all searched tables in order of how well their ranking score matches the textual user query.
+  
+<h2>Implementation in CoLD</h2>
+<p>The way in which the Postgres Full Text Search feature has been implemented is by enabling Full Text Search for multiple tables in order to search each of them with the same query. The Full Text Search then returns a joint list of results with data entries from all searched tables in order of how well their ranking score matches the textual user query.<br>
 Here I am providing an overview for which columns have been selected with which priority for the tables that can be searched using the full text feature. Note that each column to be included for text search can be weighted using weights (A, B, C, D), with A being the highest and D the lowest weight.</p>
-<ol>
-<li><strong>&quot;Answers&quot; table</strong></li>
-</ol>
-<ul>
-<li>Questions (A)</li>
-<li>Name (from Jurisdiction) (A)</li>
-<li>Themes (B)</li>
-</ul>
-<ol start="2">
-<li><strong>&quot;Court decisions&quot; table</strong></li>
-</ol>
-<ul>
-<li>Case (A)</li>
-<li>Jurisdiction Names (A)</li>
-<li>Themes (B)</li>
-<li>Choice of law issue (B)</li>
-<li>Abstract (C)</li>
-<li>Court's position (C)</li>
-<li>Relevant facts / Summary of the case (C)</li>
-<li>English translation (D)</li>
-<li>Additional information (D)</li>
-</ul>
-<ol start="3">
-<li><strong>&quot;Legislation&quot; table</strong></li>
-</ol>
-<ul>
-<li>Title (in English) (A)</li>
-<li>Official title (A)</li>
-<li>Jurisdiction name (B)</li>
-<li>Publication date (C)</li>
-<li>Entry into force (C)</li>
-<li>Full text of the provisions (D)</li>
-<li>Full text original (from Legal provisions) (D)</li>
-<li>Full text english (from Legal provisions) (D)</li>
-</ul>
-<p>For every row in each table, the respective combination of the values from all specified columns becomes one searchable document. For each table, the match between search query and searchable documents is made separately. Once the matches and ranks are calculated for each table, they are joined into one list. This list is the final result of the search results.</p>
 
+<ol>
+	<li><b>"Answers" table</b>
+	<ul>
+		<li>Questions (A)</li>
+		<li>Name (from Jurisdiction) (A)</li>
+		<li>More information (B)</li>
+		<li>Themes (C)</li>
+	</ul>
+	</li>
+	<li><b>"Court decisions" table</b>
+	<ul>
+		<li>Case (A)</li>
+		<li>Jurisdiction Names (A)</li>
+		<li>English translation (B)</li>
+		<li>Additional information (C)</li>
+	</ul>
+	</li>
+	<li><b>"Legislation" table</b>
+	<ul>
+		<li>Title (in English) (A)</li>
+		<li>Official title (A)</li>
+		<li>Jurisdiction name (B)</li>
+		<li>Publication date (B)</li>
+		<li>Entry into force (B)</li>
+		<li>Full text of the provisions (C)</li>
+		<li>Full text original (from Legal provisions) (C)</li>
+		<li>Full text english (from Legal provisions) (C)</li>
+	</ul>
+	</li>
+</ol>
+<p>For every row in each table, the respective combination of the values from all specified columns becomes one searchable document. For each table, the match between search query and searchable documents is made separately. Once the matches and ranks are calculated for each table, they are joined into one list. This list is the final result of the search results.</p>
 </body>
 </html>
