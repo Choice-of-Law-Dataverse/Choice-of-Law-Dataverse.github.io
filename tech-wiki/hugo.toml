@@ -1,0 +1,4 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "CoLD Tech Wiki"
+theme = "cold-wiki"
