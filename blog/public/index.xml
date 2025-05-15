@@ -6,8 +6,30 @@
     <description>Recent content in Welcome to CoLD Explanations and Docuemtnations on CoLD Explanations and Documentations</description>
     <generator>Hugo -- 0.140.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Dec 2024 15:24:07 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 19 Dec 2024 15:36:52 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Full Text Search</title>
+      <link>http://localhost:1313/topics/technology/full-text-search/</link>
+      <pubDate>Thu, 19 Dec 2024 15:36:52 +0100</pubDate>
+      <guid>http://localhost:1313/topics/technology/full-text-search/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Postgres</title>
+      <link>http://localhost:1313/topics/technology/postgres/</link>
+      <pubDate>Thu, 19 Dec 2024 15:36:44 +0100</pubDate>
+      <guid>http://localhost:1313/topics/technology/postgres/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Airtable</title>
+      <link>http://localhost:1313/topics/technology/airtable/</link>
+      <pubDate>Thu, 19 Dec 2024 15:36:37 +0100</pubDate>
+      <guid>http://localhost:1313/topics/technology/airtable/</guid>
+      <description>&lt;h1 id=&#34;introduction-to-airtable&#34;&gt;Introduction to Airtable&lt;/h1&gt;
+&lt;p&gt;Airtable is basically Excel on steroids. At least this is what was envisioned when Airtable was built. Now it has become a little more of a no-code monstrum that lets you do many things but at its core it is still this [insert cool adjective] Excel. The more formal way to describe this super-power Excel, is by saying: Airtable is a hybrid tool that combines the functionality of spreadsheets with the relational power of databases. This is what it is behind the scenes. In the foreground, Airtable has a visually appealing and user-friendly interface that lets anyone deal with complex data handling.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Deployment</title>
       <link>http://localhost:1313/topics/technology/deployment/</link>

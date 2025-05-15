@@ -1,153 +1,159 @@
 [
     {
-        "table": "Answers",
-        "description": "Responses to the questionnaire, which tracks the development of choice of law issues in specific jurisdictions",
+        "table": "Themes",
+        "description": "No description",
         "fields": [
             {
-                "field": "ID",
-                "description": "Unique identifier consisting of the alpha-3 country code and ID record of the question",
-                "type": "formula"
-            },
-            {
-                "field": "Question",
-                "description": "ID record of the question",
-                "type": "multipleRecordLinks"
+                "field": "Theme",
+                "description": "No description",
+                "type": "singleLineText"
             },
             {
                 "field": "Questions",
-                "description": "List of questions used in the Questionnaire, structured around 12 themes related to choice of law",
-                "type": "multipleLookupValues"
-            },
-            {
-                "field": "Jurisdiction",
-                "description": "Alpha-3 code of the jurisdiction",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Answer",
-                "description": "Predetermined answer options to the Questions (see column Answering Options in the \"Questions\" tab).",
-                "type": "multipleSelects"
-            },
-            {
-                "field": "More information",
-                "description": "Further elaboration on the predetermined Answers",
-                "type": "multilineText"
-            },
-            {
-                "field": "Interesting answer",
-                "description": "Internal field to highlight jurisdictionally unique Answers",
-                "type": "rating"
-            },
-            {
-                "field": "To review?",
-                "description": "Internal field to indicate that the Answer might not be accurate",
-                "type": "checkbox"
-            },
-            {
-                "field": "Legal provisions",
-                "description": "Legal provisions connected to the answer",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Secondary legal provisions",
-                "description": "Legal provisions of secondary importance to the Answer (mentioned in case law records)",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Legislation",
-                "description": "The main instrument that encompasses the legal provisions or the legal source of the Answer",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Cases",
-                "description": "Case law providing information to the corresponding Questions",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Themes (from Question)",
-                "description": "Automated field connected to the Questions Tab",
-                "type": "multipleLookupValues"
-            },
-            {
-                "field": "Theme Code (from Question)",
-                "description": "Automated field connected to the Questions Tab",
-                "type": "multipleLookupValues"
-            },
-            {
-                "field": "Name (from Jurisdiction)",
-                "description": "Automated field connected to the Jurisdictions Tab",
-                "type": "multipleLookupValues"
-            },
-            {
-                "field": "Alpha-3 code (from Jurisdiction)",
-                "description": "Automated field connected to the Jurisdictions Tab",
-                "type": "multipleLookupValues"
-            },
-            {
-                "field": "Type (from Jurisdiction)",
-                "description": "Automated field connected to the Jurisdictions Tab",
-                "type": "multipleLookupValues"
-            },
-            {
-                "field": "Keyword",
-                "description": "Automated field connected to the Interfaces",
-                "type": "formula"
-            },
-            {
-                "field": "test",
-                "description": "Automated field connected to Interfaces",
-                "type": "formula"
-            },
-            {
-                "field": "Record ID",
-                "description": "Airtable-specific unique identifier",
-                "type": "formula"
-            },
-            {
-                "field": "Answer Rank",
-                "description": "Field connected to the display of answers in the Interface",
-                "type": "formula"
-            },
-            {
-                "field": "Created time",
-                "description": "Metadata",
-                "type": "createdTime"
-            },
-            {
-                "field": "Answer (TEST, DO NOT USE THIS COLUMN)",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Court decisions",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Jurisdictions copy",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Jurisdictions copy",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "OUP Book Quotation",
+                "field": "Domestic Legal Provisions",
                 "description": "No description",
-                "type": "multilineText"
+                "type": "multipleRecordLinks"
             },
             {
-                "field": "data type sample",
+                "field": "Arbitral Awards",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "HCCH Comparison",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             }
         ]
     },
     {
+        "table": "Jurisdictions",
+        "description": "Table that contains all jurisdiction records for existing and future data input",
+        "fields": [
+            {
+                "field": "Alpha-3 Code",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Name",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Done",
+                "description": "Jurisdictions reviewed by AB. Useful to clarify to the user which jurisdictions have complete data.",
+                "type": "checkbox"
+            },
+            {
+                "field": "Jurisdictional Differentiator",
+                "description": "This tab explains jurisdictional peculiarities such as the judicial hierarchy and allows user to get disclaimers before consulting jurisdictional information.",
+                "type": "multilineText"
+            },
+            {
+                "field": "Jurisdiction Summary",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Legal Family",
+                "description": "No description",
+                "type": "singleSelect"
+            },
+            {
+                "field": "Type",
+                "description": "A jurisdictional record can be classified as \"State\", \"Financial\" (district), \"Supraregional\", \"Regional\" or \"Federal\" according to the legal nature of its rules.",
+                "type": "singleSelect"
+            },
+            {
+                "field": "Court Decisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Domestic Instruments Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Answers Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Region",
+                "description": "Comprehensive regional classification according to the purposes of this research project. Asia & Pacific and South & Latin America are consolidated regions.",
+                "type": "singleSelect"
+            },
+            {
+                "field": "North/South Divide",
+                "description": "The Global North does not refer to a geographic region in any traditional sense but rather to the relative power and wealth of countries in distinct parts of the world. The Global North includes many countries in the Northern Hemisphere and also some, such as Australia and New Zealand, that are located in the Southern Hemisphere. The Global South includes many countries in the southern hemisphere and some in the northern hemisphere. (see L. Braff and K. Nelson, The Global North: Introducing the region, in Gendered Lives, State University of New York, 2022).",
+                "type": "singleSelect"
+            },
+            {
+                "field": "Irrelevant?",
+                "description": "Internal field to indicate jurisdictions that will never be filled out",
+                "type": "checkbox"
+            },
+            {
+                "field": "Domestic Legal Provisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Arbitral Institutions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Arbitral Awards Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Literature Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Literature",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "Literature Title",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Specialists Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "Record ID",
+                "description": "No description",
+                "type": "formula"
+            }
+        ]
+    },
+    {
         "table": "Questions",
-        "description": "List of questions used in the Questionnaire, structured around 12 themes related to choice of law",
+        "description": "List of questions used in the Questionnaire, structured around 12 main themes related to choice of law",
         "fields": [
             {
                 "field": "ID",
@@ -156,11 +162,16 @@
             },
             {
                 "field": "Question",
-                "description": "Framework for data collection defined by the research specialists",
+                "description": "Framework for data collection defined by the research specialists; wording tailored to the website view",
                 "type": "singleLineText"
             },
             {
-                "field": "Question in accessible language",
+                "field": "Questionnaire Version",
+                "description": "Original wording for data input",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Question in Accessible Language",
                 "description": "Alternative wording to be displayed in the website (AB)",
                 "type": "singleLineText"
             },
@@ -175,7 +186,7 @@
                 "type": "singleLineText"
             },
             {
-                "field": "Themes",
+                "field": "Themes Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
@@ -185,19 +196,9 @@
                 "type": "singleSelect"
             },
             {
-                "field": "Number",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
                 "field": "Answers",
                 "description": "No description",
                 "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Legislation",
-                "description": "No description",
-                "type": "singleLineText"
             },
             {
                 "field": "Jurisdiction (from Answers)",
@@ -205,24 +206,9 @@
                 "type": "multipleLookupValues"
             },
             {
-                "field": "Answer Maps",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Answer Maps 2",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            },
-            {
                 "field": "Concepts",
                 "description": "No description",
                 "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Record ID",
-                "description": "No description",
-                "type": "formula"
             },
             {
                 "field": "Answering Options",
@@ -230,90 +216,39 @@
                 "type": "singleLineText"
             },
             {
-                "field": "Legislations",
+                "field": "Domestic Instruments Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Court decisions",
+                "field": "Court Decisions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Legal provisions",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            }
-        ]
-    },
-    {
-        "table": "Jurisdictions",
-        "description": "Table that contains all jurisdiction records for existing and future data input",
-        "fields": [
-            {
-                "field": "Alpha-3 code",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Name",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Alpha-2 code",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Numeric code",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Latitude (average)",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Longitude (average)",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Type",
-                "description": "A jurisdictional record can be classified as \"State\", \"Financial\" (district), \"Supraregional\", \"Regional\" or \"Federal\" according to the legal nature of its rules.",
-                "type": "singleSelect"
-            },
-            {
-                "field": "Court decisions",
+                "field": "Domestic Legal Provisions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Legislations",
+                "field": "International Legal Provisions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Answers",
+                "field": "HCCH Comparison Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Region",
-                "description": "Comprehensive regional classification according to the purposes of this research project. Asia & Pacific and South & Latin America are consolidated regions.",
-                "type": "singleSelect"
-            },
-            {
-                "field": "North/South divide",
-                "description": "The Global North does not refer to a geographic region in any traditional sense but rather to the relative power and wealth of countries in distinct parts of the world. The Global North includes many countries in the Northern Hemisphere and also some, such as Australia and New Zealand, that are located in the Southern Hemisphere. The Global South includes many countries in the southern hemisphere and some in the northern hemisphere. (see L. Braff and K. Nelson, The Global North: Introducing the region, in Gendered Lives, State University of New York, 2022).",
-                "type": "singleSelect"
-            },
-            {
-                "field": "Location",
+                "field": "Last Modified",
                 "description": "No description",
-                "type": "formula"
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
             },
             {
                 "field": "Record ID",
@@ -321,40 +256,282 @@
                 "type": "formula"
             },
             {
-                "field": "Answer filled out or not",
-                "description": "0 = no answer; 1 = answer has been filled out",
-                "type": "rollup"
-            },
-            {
-                "field": "Irrelevant?",
-                "description": "Internal field to indicate jurisdictions that will never be filled out",
-                "type": "checkbox"
-            },
-            {
-                "field": "Legal provisions",
+                "field": "Filtering Index",
                 "description": "No description",
-                "type": "multipleRecordLinks"
+                "type": "number"
             },
             {
-                "field": "Judicial hierarchy",
-                "description": "No description",
-                "type": "multilineText"
-            },
-            {
-                "field": "Institutions",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Arbitral awards",
+                "field": "International Legal Provisions copy",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             }
         ]
     },
     {
-        "table": "Legislation",
-        "description": "Legal instruments enacted by the legislative body of the specific jurisdiction",
+        "table": "Answers",
+        "description": "Responses to the questionnaire, which tracks the development of choice of law issues in specific jurisdictions",
+        "fields": [
+            {
+                "field": "ID",
+                "description": "Unique identifier consisting of the alpha-3 country code and ID record of the question",
+                "type": "formula"
+            },
+            {
+                "field": "Question Link",
+                "description": "ID record of the question",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Jurisdictions Link",
+                "description": "Alpha-3 code of the jurisdiction",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Answer",
+                "description": "Predetermined answer options to the Questions (see column Answering Options in the \"Questions\" tab).",
+                "type": "multipleSelects"
+            },
+            {
+                "field": "More Information",
+                "description": "Further elaboration on the predetermined Answers",
+                "type": "multilineText"
+            },
+            {
+                "field": "Interesting Answer",
+                "description": "Internal field to highlight jurisdictionally unique Answers",
+                "type": "rating"
+            },
+            {
+                "field": "To Review?",
+                "description": "Internal field to indicate that the Answer might not be accurate",
+                "type": "checkbox"
+            },
+            {
+                "field": "Domestic Instruments Link",
+                "description": "The main instrument that encompasses the legal provisions or the legal source of the Answer",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Court Decisions Link",
+                "description": "Case law providing information to the corresponding Questions",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Questions Theme Code",
+                "description": "Automated field connected to the Questions Tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Question",
+                "description": "List of questions used in the Questionnaire, structured around 12 themes related to choice of law",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Jurisdictions",
+                "description": "Automated field connected to the Jurisdictions Tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Jurisdictions Alpha-3 code",
+                "description": "Automated field connected to the Jurisdictions Tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Record ID",
+                "description": "Airtable-specific unique identifier",
+                "type": "formula"
+            },
+            {
+                "field": "Created Time",
+                "description": "Metadata",
+                "type": "createdTime"
+            },
+            {
+                "field": "Domestic Legal Provisions Link",
+                "description": "Legal provisions connected to the answer",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Secondary Domestic Legal Provisions Link",
+                "description": "Domestic Legal Provisions of secondary importance to the Answer (mentioned in case law records)",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "OUP Book Quote",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Domestic Legal Provisions",
+                "description": "Automated helper column linked to the Domestic Legal Provisions tab. Primary Articles cited for the Answer.",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Domestic Instruments",
+                "description": "Automated helper column linked to the Legislation tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Secondary Legal Provision Articles",
+                "description": "Automated helper column linked to the Legal provisions tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Court Decisions",
+                "description": "Automated helper column linked to the Court decisions tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Themes",
+                "description": "Automated helper column linked to the Questions tab",
+                "type": "rollup"
+            },
+            {
+                "field": "Court Decisions ID",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Domestic Instruments ID",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Literature Link",
+                "description": "Literature related to the Answer",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "Jurisdictions Literature Title",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Jurisdictions Literature ID",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Jurisdictions Region",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Jurisdictions Irrelevant",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            }
+        ]
+    },
+    {
+        "table": "HCCH Answers",
+        "description": "Transnational guidelines that can be compared with the methodological framework for Answers per Jurisdiction (main aspects only)",
+        "fields": [
+            {
+                "field": "ID",
+                "description": "No description",
+                "type": "autoNumber"
+            },
+            {
+                "field": "Adapted Question",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Position",
+                "description": "No description",
+                "type": "multipleSelects"
+            },
+            {
+                "field": "Questions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Questions ID",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Questions Primary Theme",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Theme Code (from Original Question)",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Themes Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Themes",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "International Legal Provisions Full Text",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "International Legal Provisions Title of the Provision",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "International Legal Provisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "International Instruments Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "International Instruments",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "International Instruments copy",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "International Legal Provisions copy",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            }
+        ]
+    },
+    {
+        "table": "Domestic Instruments",
+        "description": "Legal instruments enacted by the legislative body of the specific jurisdiction - cutoff date 11 Feb 25, all entries added after this date need to be entered with complete info if possible; updates should be tagged.",
         "fields": [
             {
                 "field": "ID",
@@ -367,34 +544,64 @@
                 "type": "singleLineText"
             },
             {
-                "field": "Official title",
+                "field": "Official Title",
                 "description": "Title of the legal instrument in the respective language of the jurisdiction",
                 "type": "singleLineText"
             },
             {
-                "field": "Compatible with the HCCH Principles?",
-                "description": "Checkbox to indicate whether the HCCH Principles are incorporated in the legal instrument",
-                "type": "checkbox"
-            },
-            {
-                "field": "Publication date",
-                "description": "The date that the legal instrument was published",
-                "type": "date"
-            },
-            {
-                "field": "Entry into force",
+                "field": "Entry Into Force",
                 "description": "The date that the legal instrument became effective in that jurisdiction",
                 "type": "date"
             },
             {
-                "field": "Jurisdictions",
+                "field": "Date",
+                "description": "Entry into force as main reference date",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Publication Date",
+                "description": "The date that the legal instrument was published",
+                "type": "date"
+            },
+            {
+                "field": "Source (PDF)",
+                "description": "PDF file of legal instrument",
+                "type": "multipleAttachments"
+            },
+            {
+                "field": "Source (URL)",
+                "description": "Website where the legal instrument is available",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Abbreviation",
+                "description": "The official abbreviation used for the legal instrument, preferrably the English version",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Compatible With the HCCH Principles?",
+                "description": "Checkbox to indicate whether the HCCH Principles are incorporated in the legal instrument",
+                "type": "checkbox"
+            },
+            {
+                "field": "Compatible With the UNCITRAL Model Law?",
+                "description": "Checkbox to indicate whether the arbitration law is inspired by the UNCITRAL Model Law ",
+                "type": "checkbox"
+            },
+            {
+                "field": "Jurisdictions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Jurisdiction (from forms)",
+                "field": "Jurisdictions",
                 "description": "No description",
-                "type": "singleLineText"
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Jurisdictions Alpha-3 Code",
+                "description": "No description",
+                "type": "multipleLookupValues"
             },
             {
                 "field": "Type (from Jurisdictions)",
@@ -402,7 +609,7 @@
                 "type": "multipleLookupValues"
             },
             {
-                "field": "Answers",
+                "field": "Answers Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
@@ -412,54 +619,39 @@
                 "type": "multipleLookupValues"
             },
             {
-                "field": "Questions",
+                "field": "Questions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
                 "field": "Relevant Provisions",
-                "description": "No description",
+                "description": "To be included in the Domestic Legal Provisions table",
                 "type": "multilineText"
             },
             {
-                "field": "Full text of the provisions",
-                "description": "No description",
+                "field": "Full Text of the Provisions",
+                "description": "To be included in the Domestic Legal Provisions table",
                 "type": "multilineText"
             },
             {
-                "field": "Themes",
-                "description": "No description",
-                "type": "multipleLookupValues"
-            },
-            {
-                "field": "Observations",
-                "description": "Internal field for comments",
-                "type": "multilineText"
-            },
-            {
-                "field": "Created time",
-                "description": "No description",
-                "type": "createdTime"
-            },
-            {
-                "field": "Official Source (URL)",
-                "description": "Website where the legal instrument is available",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Official Source (PDF)",
-                "description": "PDF file of legal instrument",
-                "type": "multipleAttachments"
-            },
-            {
-                "field": "Legal provisions",
+                "field": "Domestic Legal Provisions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Record ID",
+                "field": "Domestic Legal Provisions",
                 "description": "No description",
-                "type": "formula"
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Domestic Legal Provisions Full Text of the Provision (Original Language)",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Domestic Legal Provisions Full Text of the Provision (English Translation)",
+                "description": "No description",
+                "type": "multipleLookupValues"
             },
             {
                 "field": "ID-number",
@@ -467,14 +659,34 @@
                 "type": "autoNumber"
             },
             {
-                "field": "Jurisdictions copy",
+                "field": "Themes Name",
                 "description": "No description",
-                "type": "multipleRecordLinks"
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Created Time",
+                "description": "No description",
+                "type": "createdTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "Record ID",
+                "description": "No description",
+                "type": "formula"
             }
         ]
     },
     {
-        "table": "Legal provisions",
+        "table": "Domestic Legal Provisions",
         "description": "Individual provisions contained in a Legislation",
         "fields": [
             {
@@ -483,7 +695,7 @@
                 "type": "formula"
             },
             {
-                "field": "Corresponding legislation",
+                "field": "Domestic Instruments Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
@@ -493,18 +705,23 @@
                 "type": "singleLineText"
             },
             {
-                "field": "Full text of the provision (Original language)",
+                "field": "Full Text of the Provision (Original Language)",
                 "description": "Relevant excerpt of the law",
                 "type": "multilineText"
             },
             {
-                "field": "Full text of the provision (English translation)",
+                "field": "Full Text of the Provision (English Translation)",
                 "description": "Translated excerpt",
                 "type": "multilineText"
             },
             {
                 "field": "Answers",
-                "description": "No description",
+                "description": "Primary Domestic Legal Provisions",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Answers 2",
+                "description": "Secondary Domestic Legal Provisions",
                 "type": "multipleRecordLinks"
             },
             {
@@ -513,14 +730,9 @@
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Jurisdictions",
+                "field": "Jurisdictions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Jurisdiction (from forms)",
-                "description": "HELPER COLUMN",
-                "type": "singleLineText"
             },
             {
                 "field": "Record ID",
@@ -528,24 +740,414 @@
                 "type": "formula"
             },
             {
-                "field": "Jurisdictions copy",
+                "field": "Themes Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Answers 2",
-                "description": "Automated link to answers for secondary legal provisions",
-                "type": "multipleRecordLinks"
+                "field": "Themes",
+                "description": "No description",
+                "type": "singleLineText"
             },
             {
-                "field": "Themes",
+                "field": "Legislation Title",
+                "description": "Automated helper column linked to the Legislation tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Full Descriptor",
+                "description": "No description",
+                "type": "formula"
+            },
+            {
+                "field": "Jurisdictions",
+                "description": "Automated helper column linked to the Jurisdictions tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "Court Decisions",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             }
         ]
     },
     {
-        "table": "Court decisions",
+        "table": "Regional Instruments",
+        "description": "No description",
+        "fields": [
+            {
+                "field": "ID",
+                "description": "Combines the first 3 letters of the 'Name' field with a hyphen and the 'ID Number' field",
+                "type": "formula"
+            },
+            {
+                "field": "Name",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Regional Legal Provisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Specialists Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Specialists",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "URL",
+                "description": "No description",
+                "type": "url"
+            },
+            {
+                "field": "Attachment",
+                "description": "No description",
+                "type": "multipleAttachments"
+            },
+            {
+                "field": "Date",
+                "description": "No description",
+                "type": "date"
+            },
+            {
+                "field": "Literature Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Literature",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "HCCH Comparison Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "ID Number",
+                "description": "No description",
+                "type": "autoNumber"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            }
+        ]
+    },
+    {
+        "table": "Regional Legal Provisions",
+        "description": "Provisions of regional instruments organized by theme",
+        "fields": [
+            {
+                "field": "ID",
+                "description": "No description",
+                "type": "formula"
+            },
+            {
+                "field": "Title of the Provision",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Topic",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Instrument Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Instrument",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Provision",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Full Text",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Questions",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Interface Order",
+                "description": "No description",
+                "type": "number"
+            },
+            {
+                "field": "Record ID",
+                "description": "No description",
+                "type": "formula"
+            },
+            {
+                "field": "Literature Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Literature",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "Arbitral Awards",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "HCCH Comparison Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "HCCH Comparison",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            }
+        ]
+    },
+    {
+        "table": "International Instruments",
+        "description": "No description",
+        "fields": [
+            {
+                "field": "ID",
+                "description": "Combines the first 3 letters of the 'Name' field with a hyphen and the 'ID Number' field",
+                "type": "formula"
+            },
+            {
+                "field": "Name",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "International Legal Provisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Specialists Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Specialists",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "URL",
+                "description": "No description",
+                "type": "url"
+            },
+            {
+                "field": "Attachment",
+                "description": "No description",
+                "type": "multipleAttachments"
+            },
+            {
+                "field": "Date",
+                "description": "No description",
+                "type": "date"
+            },
+            {
+                "field": "Literature Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Literature",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "HCCH Comparison Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "ID Number",
+                "description": "No description",
+                "type": "autoNumber"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "International Legal Provisions copy",
+                "description": "No description",
+                "type": "singleLineText"
+            }
+        ]
+    },
+    {
+        "table": "International Legal Provisions",
+        "description": "Provisions of international instruments organized by theme",
+        "fields": [
+            {
+                "field": "ID",
+                "description": "No description",
+                "type": "formula"
+            },
+            {
+                "field": "Title of the Provision",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Topic",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Instrument Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Instrument",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Provision",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Full Text",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Questions",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Interface Order",
+                "description": "No description",
+                "type": "number"
+            },
+            {
+                "field": "Record ID",
+                "description": "No description",
+                "type": "formula"
+            },
+            {
+                "field": "Literature Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Literature",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "Arbitral Awards",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "HCCH Comparison Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "HCCH Comparison",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "International Instruments copy",
+                "description": "No description",
+                "type": "singleLineText"
+            }
+        ]
+    },
+    {
+        "table": "Topics",
+        "description": "No description",
+        "fields": [
+            {
+                "field": "Topic",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Regional Legal Provisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "International Legal Provisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            }
+        ]
+    },
+    {
+        "table": "Court Decisions",
         "description": "Cases decided by a State Courts",
         "fields": [
             {
@@ -554,22 +1156,37 @@
                 "type": "formula"
             },
             {
-                "field": "Case",
-                "description": "This field contains information on the Issuing Court, the Claimant and Respondent's names, the Number ID of the case, and the date when the decision was issued. The title of the case varies according to the jurisdiction. ",
+                "field": "Case Citation",
+                "description": "This field contains information on the Issuing Court, the Claimant and Respondent's names, the Number ID of the case, and the date when the decision was issued. The way the case is cited varies according to the jurisdiction. ",
                 "type": "singleLineText"
             },
             {
-                "field": "Jurisdictions",
+                "field": "Case Title",
+                "description": "Main part of the case citation (information identifying the case, be it the parties' names, the \"case title\", or how the case is commonly known by practitioners). Some jurisdictions might also use the number as a Case ID.",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Instance",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Date",
+                "description": "Publication Date",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Jurisdictions Link",
                 "description": "Alpha-3 code of the jurisdiction",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Type (from Jurisdictions)",
-                "description": "No description",
-                "type": "multipleLookupValues"
+                "field": "Case Rank",
+                "description": "Evaluation of court decisions and assignment of a rank from 1-10 with 1 being completely unrelated/unimportant and 10 being of indispensable importance.",
+                "type": "singleLineText"
             },
             {
-                "field": "Answers",
+                "field": "Answers Link",
                 "description": "Questions answered by this case for the corresponding jurisdiction",
                 "type": "multipleRecordLinks"
             },
@@ -585,17 +1202,17 @@
             },
             {
                 "field": "Abstract",
-                "description": "Official abstract of the decision, otherwise AI-generated",
+                "description": "Official abstract of the decision translated into English (if possible), otherwise AI-generated",
                 "type": "multilineText"
             },
             {
-                "field": "Content",
-                "description": "Text transcription if possible (SW)",
+                "field": "English Translation",
+                "description": "Full text of the case translated into English (if the original language of the decision is not English)",
                 "type": "multilineText"
             },
             {
-                "field": "Additional information",
-                "description": "Cases related to topics that are currently outside the scope of the Dataverse",
+                "field": "Internal Notes",
+                "description": "Internal field: Remarks related to the case law analysis and tied to the case ranking or nature of the case ",
                 "type": "multilineText"
             },
             {
@@ -604,37 +1221,27 @@
                 "type": "rollup"
             },
             {
-                "field": "Selected case",
-                "description": "Cases chosen for LLM training",
-                "type": "checkbox"
-            },
-            {
-                "field": "Observations",
-                "description": "Internal field for remarks",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Relevant facts / Summary of the case",
+                "field": "Relevant Facts",
                 "description": "A short summary of the facts of the case (who are the parties, what happened, what is the dispute about, the different stages of court proceedings, etc.). This field prioritizes information on choice of law.",
                 "type": "multilineText"
             },
             {
-                "field": "Relevant rules of law involved",
+                "field": "PIL Provisions",
                 "description": "The relevant legal provisions that are related to choice of law from the choice of law issue(s)/agreement/clause/interpretation(s). This field might also include important precedents or other decisions that were used as a reference in the judgment. ",
                 "type": "multilineText"
             },
             {
-                "field": "Choice of law issue",
+                "field": "Choice of Law Issue",
                 "description": "Questions arising from the choice of law issue(s)/agreement/clause/interpretation(s)",
                 "type": "multilineText"
             },
             {
-                "field": "Court's position",
+                "field": "Court's Position",
                 "description": "The opinion of the court in regard to the statements made in the \"Choice of law issue\" column.",
                 "type": "multilineText"
             },
             {
-                "field": "Text of the relevant legal provisions",
+                "field": "Text of the Relevant Legal Provisions",
                 "description": "Full text of the relevant rules involved. Also found in the \"Answers\" tab with further elaboration of the legal provision.",
                 "type": "multilineText"
             },
@@ -644,7 +1251,7 @@
                 "type": "multilineText"
             },
             {
-                "field": "Translated excerpt",
+                "field": "Translated Excerpt",
                 "description": "English translation of the \"Quote\" column (relevant excerpt of the decision)",
                 "type": "multilineText"
             },
@@ -654,12 +1261,7 @@
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Jurisdiction (from forms)",
-                "description": "Helper column",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Copyright issues",
+                "field": "Copyright Issues",
                 "description": "Internal field to indicate that the PDF file cannot be publicly shared",
                 "type": "checkbox"
             },
@@ -674,39 +1276,575 @@
                 "type": "autoNumber"
             },
             {
-                "field": "Jurisdiction Name",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Arbitral awards",
+                "field": "Arbitral Awards Link",
                 "description": "Arbitral award preceding this court decision (contested before this Court)",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Case rank",
-                "description": "Evaluation of court decisions and assignment of a rank from1-10 with 1 being completely unrelated/ unimportant and 10 being of indispensable importance.",
+                "field": "Jurisdictions",
+                "description": "Automated helper column linked to the Jurisdictions tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Region (from Jurisdictions)",
+                "description": "Automated helper column linked to the Jurisdictions tab",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Date of Judgment",
+                "description": "Date when the court decided the case. Might vary from publication date.",
+                "type": "date"
+            },
+            {
+                "field": "Original Text",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Created",
+                "description": "No description",
+                "type": "createdTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "Added By",
+                "description": "No description",
+                "type": "createdBy"
+            },
+            {
+                "field": "Official Keywords",
+                "description": "Official keywords indicated by the court, even if it goes beyond the PIL scope - if possible, translate them",
                 "type": "singleLineText"
             },
             {
-                "field": "Pinpoint facts",
-                "description": "Reference to verify the data on facts (summary)",
-                "type": "multilineText"
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
             },
             {
-                "field": "Pinpoint rules",
-                "description": "Reference to verify the data on rules of law",
-                "type": "multilineText"
+                "field": "Answers Question",
+                "description": "No description",
+                "type": "multipleLookupValues"
             },
             {
-                "field": "Pinpoint CoL",
-                "description": "Reference to verify the data on choice of law issue",
-                "type": "multilineText"
+                "field": "Domestic Legal Provisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Jurisdictions Alpha-3 Code",
+                "description": "No description",
+                "type": "multipleLookupValues"
             }
         ]
     },
     {
-        "table": "Arbitral institutions",
+        "table": "Literature",
+        "description": "No description",
+        "fields": [
+            {
+                "field": "ID",
+                "description": "No description",
+                "type": "autoNumber"
+            },
+            {
+                "field": "Key",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Item Type",
+                "description": "No description",
+                "type": "singleSelect"
+            },
+            {
+                "field": "Publication Year",
+                "description": "No description",
+                "type": "number"
+            },
+            {
+                "field": "Author",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Title",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Publication Title",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "ISBN",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "ISSN",
+                "description": "No description",
+                "type": "multipleSelects"
+            },
+            {
+                "field": "DOI",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Url",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Abstract Note",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Date",
+                "description": "No description",
+                "type": "singleLineText"
+            },
+            {
+                "field": "Date Added",
+                "description": "No description",
+                "type": "dateTime"
+            },
+            {
+                "field": "Date Modified",
+                "description": "No description",
+                "type": "dateTime"
+            },
+            {
+                "field": "Access Date",
+                "description": "No description",
+                "type": "dateTime"
+            },
+            {
+                "field": "Pages",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Num Pages",
+                "description": "No description",
+                "type": "number"
+            },
+            {
+                "field": "Issue",
+                "description": "No description",
+                "type": "number"
+            },
+            {
+                "field": "Volume",
+                "description": "No description",
+                "type": "number"
+            },
+            {
+                "field": "Number Of Volumes",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Journal Abbreviation",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Short Title",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Series",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Series Number",
+                "description": "No description",
+                "type": "number"
+            },
+            {
+                "field": "Series Text",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Series Title",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Publisher",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Place",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Language",
+                "description": "No description",
+                "type": "singleSelect"
+            },
+            {
+                "field": "Rights",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Type",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Archive",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Archive Location",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Library Catalog",
+                "description": "No description",
+                "type": "singleSelect"
+            },
+            {
+                "field": "Call Number",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Extra",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Notes",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Link Attachments",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Manual Tags",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Automatic Tags",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Editor",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Series Editor",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Translator",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Contributor",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Attorney Agent",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Book Author",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Cast Member",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Commenter",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Composer",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Cosponsor",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Counsel",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Interviewer",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Producer",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Recipient",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Reviewed Author",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Scriptwriter",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Words By",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Guest",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Number",
+                "description": "No description",
+                "type": "number"
+            },
+            {
+                "field": "Edition",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Running Time",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Scale",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Medium",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Artwork Size",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Filing Date",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Application Number",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Assignee",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Issuing Authority",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Country",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Meeting Name",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Conference Name",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Court",
+                "description": "No description",
+                "type": "singleSelect"
+            },
+            {
+                "field": "References",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Reporter",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Legal Status",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Priority Numbers",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Programming Language",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Version",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "System",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Code",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Code Number",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Section",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Session",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Committee",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "History",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Legislative Body",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Jurisdiction Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Jurisdiction",
+                "description": "No description",
+                "type": "rollup"
+            },
+            {
+                "field": "Answers",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "OUP JD Chapter",
+                "description": "No description",
+                "type": "checkbox"
+            },
+            {
+                "field": "International Legal Provisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "International Instruments Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "International Legal Provisions",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "International Instruments",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Jurisdiction Summary",
+                "description": "No description",
+                "type": "multilineText"
+            },
+            {
+                "field": "Regional Instruments Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Regional Legal Provisions Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
+            }
+        ]
+    },
+    {
+        "table": "Arbitral Institutions",
         "description": "Institutions that facilitate arbitral proceedings",
         "fields": [
             {
@@ -720,38 +1858,53 @@
                 "type": "multilineText"
             },
             {
-                "field": "Country",
+                "field": "Jurisdictions Link",
                 "description": "Jurisdiction in which the arbitral institution has its headquarters",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Arbitral rules",
+                "field": "Arbitral Rules Link",
                 "description": "Set of rules that governs the proceedings for institutional arbitrations",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Arbitral awards",
+                "field": "Arbitral Awards Link",
                 "description": "Relevant arbitral decisions conducted by the institutional",
                 "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Record ID",
+                "description": "No description",
+                "type": "formula"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
             }
         ]
     },
     {
-        "table": "Arbitral rules",
+        "table": "Arbitral Rules",
         "description": "Rules from a given arbitral institution",
         "fields": [
             {
-                "field": "Set of rules",
+                "field": "Set of Rules",
                 "description": "Title of the instrument from a given arbitral institution",
                 "type": "singleLineText"
             },
             {
-                "field": "Institutions",
+                "field": "Arbitral Institutions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "In force from",
+                "field": "In Force From",
                 "description": "Date the instrument was enacted",
                 "type": "date"
             },
@@ -759,20 +1912,40 @@
                 "field": "Official Source (URL)",
                 "description": "Website where the rules are available",
                 "type": "url"
+            },
+            {
+                "field": "Record ID",
+                "description": "No description",
+                "type": "formula"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
             }
         ]
     },
     {
-        "table": "Arbitral awards",
+        "table": "Arbitral Awards",
         "description": "Cases decided by Arbitral Tribunals",
         "fields": [
+            {
+                "field": "ID Number",
+                "description": "No description",
+                "type": "autoNumber"
+            },
             {
                 "field": "Case Number",
                 "description": "Official case reference designated by the arbitral institution",
                 "type": "singleLineText"
             },
             {
-                "field": "Institution",
+                "field": "Arbitral Institution Link",
                 "description": "Responsible arbitral institution for the case",
                 "type": "multipleRecordLinks"
             },
@@ -787,7 +1960,7 @@
                 "type": "number"
             },
             {
-                "field": "Nature of the award",
+                "field": "Nature of the Award",
                 "description": "This field refers to the procedural stage of the arbitration when the decision was rendered",
                 "type": "multipleSelects"
             },
@@ -802,86 +1975,85 @@
                 "type": "multilineText"
             },
             {
-                "field": "Jurisdiction",
+                "field": "Jurisdictions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Award summary",
+                "field": "Award Summary",
                 "description": "Brief summary of the determination of the applicable law, including composition of the arbitral tribunal",
                 "type": "multilineText"
             },
             {
-                "field": "Themes",
-                "description": "No description",
+                "field": "Court Decisions Link",
+                "description": "Appeal to Decision Before State Court",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Appeal to decision before state court",
+                "field": "Record ID",
+                "description": "No description",
+                "type": "formula"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Last Modified By",
+                "description": "No description",
+                "type": "lastModifiedBy"
+            },
+            {
+                "field": "Themes Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             }
         ]
     },
     {
-        "table": "Images",
-        "description": "Internal tab for Interfaces",
+        "table": "Specialists",
+        "description": "No description",
         "fields": [
             {
-                "field": "Name",
+                "field": "Specialist",
                 "description": "No description",
-                "type": "singleLineText"
+                "type": "multilineText"
             },
             {
-                "field": "Index",
-                "description": "No description",
-                "type": "number"
-            },
-            {
-                "field": "Attachments",
-                "description": "No description",
-                "type": "multipleAttachments"
-            },
-            {
-                "field": "Description",
-                "description": "No description",
-                "type": "singleLineText"
-            }
-        ]
-    },
-    {
-        "table": "Answer Maps",
-        "description": "Internal tab for Interfaces",
-        "fields": [
-            {
-                "field": "Name",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Attachments",
-                "description": "No description",
-                "type": "multipleAttachments"
-            },
-            {
-                "field": "Questions",
+                "field": "Jurisdiction Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Question",
+                "field": "Jurisdiction",
                 "description": "No description",
                 "type": "multipleLookupValues"
             },
             {
-                "field": "Legend",
+                "field": "Instrument Link",
                 "description": "No description",
-                "type": "multilineText"
+                "type": "multipleRecordLinks"
+            },
+            {
+                "field": "Instrument",
+                "description": "No description",
+                "type": "multipleLookupValues"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
+            },
+            {
+                "field": "Regional Instruments Link",
+                "description": "No description",
+                "type": "multipleRecordLinks"
             }
         ]
     },
     {
-        "table": "Concepts",
+        "table": "Glossary",
         "description": "Key terms related choice of law",
         "fields": [
             {
@@ -890,12 +2062,17 @@
                 "type": "singleLineText"
             },
             {
-                "field": "Questions",
+                "field": "ID-Number",
+                "description": "No description",
+                "type": "autoNumber"
+            },
+            {
+                "field": "Questions Link",
                 "description": "No description",
                 "type": "multipleRecordLinks"
             },
             {
-                "field": "Question (from Questions)",
+                "field": "Questions",
                 "description": "No description",
                 "type": "multipleLookupValues"
             },
@@ -905,302 +2082,9 @@
                 "type": "multilineText"
             },
             {
-                "field": "Assignee",
-                "description": "Responsible person to enter the final text",
-                "type": "singleCollaborator"
-            },
-            {
-                "field": "Status",
-                "description": "Internal field for task management",
-                "type": "singleSelect"
-            },
-            {
-                "field": "Source",
-                "description": "How the first draft of the Definition came about",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Time stamp",
-                "description": "No description",
-                "type": "lastModifiedTime"
-            },
-            {
-                "field": "ID-number",
-                "description": "No description",
-                "type": "autoNumber"
-            }
-        ]
-    },
-    {
-        "table": "HCCH Principles themes",
-        "description": "Provisions of the HCCH Principles organized by theme",
-        "fields": [
-            {
-                "field": "Theme",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Provision HCCH Principles",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Full text",
-                "description": "No description",
-                "type": "multilineText"
-            },
-            {
-                "field": "Questions",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Court Decisions",
-                "description": "No description",
-                "type": "multipleLookupValues"
-            },
-            {
-                "field": "Airtable Interface Order",
-                "description": "No description",
-                "type": "number"
-            },
-            {
-                "field": "Arbitral awards",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Legislation",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Legal provisions",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            }
-        ]
-    },
-    {
-        "table": "Country Report Jurisdictions",
-        "description": "Internal tab for Interfaces (name of jurisdictions)",
-        "fields": [
-            {
-                "field": "Name",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Alpha-3 code",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Alpha-2 code",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Numeric code",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Latitude (average)",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Longitude (average)",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Type",
-                "description": "No description",
-                "type": "singleSelect"
-            },
-            {
-                "field": "Court decisions",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Legislations",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Answers",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Region",
-                "description": "No description",
-                "type": "singleSelect"
-            },
-            {
-                "field": "North/South divide",
-                "description": "No description",
-                "type": "singleSelect"
-            },
-            {
-                "field": "Location",
-                "description": "No description",
-                "type": "formula"
-            },
-            {
-                "field": "Image",
-                "description": "No description",
-                "type": "multipleAttachments"
-            },
-            {
-                "field": "Questions",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Arbitral awards",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Record ID",
-                "description": "No description",
-                "type": "formula"
-            },
-            {
-                "field": "Answer filled out or not",
-                "description": "0 = no answer; 1 = answer has been filled out",
-                "type": "rollup"
-            },
-            {
-                "field": "Irrelevant?",
+                "field": "Relevant for Case Analysis",
                 "description": "No description",
                 "type": "checkbox"
-            },
-            {
-                "field": "Legal provisions",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            }
-        ]
-    },
-    {
-        "table": "data type sample",
-        "description": "this is a test to see what airtable data formats look like",
-        "fields": [
-            {
-                "field": "Single line text",
-                "description": "No description",
-                "type": "singleLineText"
-            },
-            {
-                "field": "Long text",
-                "description": "No description",
-                "type": "multilineText"
-            },
-            {
-                "field": "User",
-                "description": "No description",
-                "type": "singleCollaborator"
-            },
-            {
-                "field": "Single select",
-                "description": "No description",
-                "type": "singleSelect"
-            },
-            {
-                "field": "Link to another record",
-                "description": "No description",
-                "type": "multipleRecordLinks"
-            },
-            {
-                "field": "Attachment",
-                "description": "No description",
-                "type": "multipleAttachments"
-            },
-            {
-                "field": "Checkbox",
-                "description": "No description",
-                "type": "checkbox"
-            },
-            {
-                "field": "Multiple select",
-                "description": "No description",
-                "type": "multipleSelects"
-            },
-            {
-                "field": "Date",
-                "description": "No description",
-                "type": "date"
-            },
-            {
-                "field": "Phone number",
-                "description": "No description",
-                "type": "phoneNumber"
-            },
-            {
-                "field": "Email",
-                "description": "No description",
-                "type": "email"
-            },
-            {
-                "field": "URL",
-                "description": "No description",
-                "type": "url"
-            },
-            {
-                "field": "Number",
-                "description": "No description",
-                "type": "number"
-            },
-            {
-                "field": "Currency",
-                "description": "No description",
-                "type": "currency"
-            },
-            {
-                "field": "Percent",
-                "description": "No description",
-                "type": "percent"
-            },
-            {
-                "field": "Duration",
-                "description": "No description",
-                "type": "duration"
-            },
-            {
-                "field": "Rating",
-                "description": "No description",
-                "type": "rating"
-            },
-            {
-                "field": "Formula",
-                "description": "No description",
-                "type": "formula"
-            },
-            {
-                "field": "Rollup",
-                "description": "No description",
-                "type": "rollup"
-            },
-            {
-                "field": "Count",
-                "description": "No description",
-                "type": "count"
-            },
-            {
-                "field": "Answer (from Link to another record)",
-                "description": "No description",
-                "type": "multipleLookupValues"
-            },
-            {
-                "field": "Created",
-                "description": "No description",
-                "type": "createdTime"
             },
             {
                 "field": "Last Modified",
@@ -1208,24 +2092,45 @@
                 "type": "lastModifiedTime"
             },
             {
-                "field": "Created By",
-                "description": "No description",
-                "type": "createdBy"
+                "field": "Source",
+                "description": "Internal field: How the first draft of the Definition came about",
+                "type": "singleLineText"
             },
             {
-                "field": "Last Modified By",
+                "field": "Time Stamp",
                 "description": "No description",
-                "type": "lastModifiedBy"
+                "type": "lastModifiedTime"
             },
             {
-                "field": "Autonumber",
+                "field": "Record ID",
                 "description": "No description",
-                "type": "autoNumber"
+                "type": "formula"
+            }
+        ]
+    },
+    {
+        "table": "Abbreviations",
+        "description": "No description",
+        "fields": [
+            {
+                "field": "Abbreviation",
+                "description": "No description",
+                "type": "singleLineText"
             },
             {
-                "field": "Barcode",
+                "field": "Designation",
                 "description": "No description",
-                "type": "barcode"
+                "type": "multilineText"
+            },
+            {
+                "field": "Type",
+                "description": "No description",
+                "type": "singleSelect"
+            },
+            {
+                "field": "Last Modified",
+                "description": "No description",
+                "type": "lastModifiedTime"
             }
         ]
     }
