@@ -118,6 +118,7 @@ main {
 }
 
 .cold-footer {
+  height: 25vh;
   border: none;
   background: #0F0035;
   color: #fff;
@@ -129,14 +130,9 @@ main {
 }
 
 .cold-footer-content {
-  width: 75vw;
-  margin-left: 0;
+  margin-left: 17.5vw;;
   margin-right: auto;
   padding: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
 }
 
 .cold-footer-title {
