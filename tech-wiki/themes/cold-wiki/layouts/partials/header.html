@@ -5,12 +5,12 @@
     </div>
     <nav class="header-bar-nav">
       <ul>
-        <li><a href="/">Overview</a></li>
-        <li><a href="/data/">Data</a></li>
-        <li><a href="/search-algorithm/">Search Algorithm</a></li>
-        <li><a href="/architecture/">Architecture</a></li>
-        <li><a href="/stack/">Technology</a></li>
-        <li><a href="/deployment/">Deployment</a></li>
+        <li{{ if eq .RelPermalink "/" }} class="active"{{ end }}><a href="/">Overview</a></li>
+        <li{{ if eq .RelPermalink "/data/" }} class="active"{{ end }}><a href="/data/">Data</a></li>
+        <li{{ if eq .RelPermalink "/search-algorithm/" }} class="active"{{ end }}><a href="/search-algorithm/">Search Algorithm</a></li>
+        <li{{ if eq .RelPermalink "/architecture/" }} class="active"{{ end }}><a href="/architecture/">Architecture</a></li>
+        <li{{ if eq .RelPermalink "/stack/" }} class="active"{{ end }}><a href="/stack/">Technology</a></li>
+        <li{{ if eq .RelPermalink "/deployment/" }} class="active"{{ end }}><a href="/deployment/">Deployment</a></li>
       </ul>
     </nav>
   </div>

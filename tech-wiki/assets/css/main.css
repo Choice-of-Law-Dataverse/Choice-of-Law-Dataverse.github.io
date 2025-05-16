@@ -68,6 +68,16 @@ html, body {
   align-items: center;
 }
 
+.header-bar-nav ul li a {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.header-bar-nav ul li.active a,
+.header-bar-nav ul li a.active {
+  border-bottom: 3px solid #6F4DFA;
+}
+
 .header-bar-logo {
   width: 100%;
   display: flex;
