@@ -1,2 +1,120 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><link rel=icon href=https://choiceoflawdataverse.blob.core.windows.net/assets/favicon/favicon.ico type=image/x-icon><title>Technology Stack | CoLD Tech Wiki</title>
-<link rel=stylesheet href=/css/main.min.84db4fb04dcac264860c2b401a8e30cbb644aaf337fd7e68cab6a129816b78d4.css integrity="sha256-hNtPsE3KwmSGDCtAGo4wy7ZEqvM3/X5oyrahKYFreNQ=" crossorigin=anonymous><script src=/js/main.23cd0c7d837263b9eaeb96ee2d9ccfa2969daa3fa00fa1c1fe8701a9b87251a1.js integrity="sha256-I80MfYNyY7nq65buLZzPopadqj+gD6HB/ocBqbhyUaE=" crossorigin=anonymous></script><link rel=stylesheet href=/css/main.css></head><body><header><div class=header-bar><div class=header-bar-row><div class=header-bar-logo><img src=https://choiceoflawdataverse.blob.core.windows.net/assets/cold_logo.svg alt="CoLD Logo"></div><nav class=header-bar-nav><ul><li><a href=/>Overview</a></li><li><a href=/data/>Data</a></li><li><a href=/search-algorithm/>Search Algorithm</a></li><li><a href=/architecture/>Architecture</a></li><li><a href=/stack/>Technology</a></li><li><a href=/deployment/>Deployment</a></li></ul></nav></div></div></header><main><main class=container><div class=content><h1 id=technology-stack>Technology Stack</h1><h2 id=database-technologies>Database Technologies</h2><h3 id=primary-data-storage>Primary Data Storage</h3><ul><li><strong>Airtable</strong><ul><li>Plus Plan subscription</li><li>Capacity for ~15,000 records per base</li><li>5GB attachment storage per base</li><li>Relational database structure</li><li>Cloud-synced with Amazon Web Services infrastructure</li></ul></li></ul><h3 id=secondary-database>Secondary Database</h3><ul><li><strong>PostgreSQL</strong> on Azure<ul><li>Stores data for public web interface</li><li>Synchronized with selected Airtable data</li></ul></li></ul><h2 id=cloud-infrastructure>Cloud Infrastructure</h2><ul><li><strong>Microsoft Azure</strong><ul><li><strong>Azure Container Apps</strong>: Hosts containerized application components</li><li><strong>Azure Kubernetes Service</strong>: Orchestrates containers for scalability</li><li><strong>Azure PostgreSQL</strong>: Managed database service</li></ul></li></ul><h2 id=development-tools>Development Tools</h2><ul><li><strong>Airtable API</strong>: For programmatic access to database content</li><li><strong>Airtable Scripting Extension</strong>: For metadata collection and automation</li></ul><h2 id=backup-tools>Backup Tools</h2><ul><li><strong>SwitchDrive</strong>: University-provided cloud storage</li><li><strong>OneDrive</strong>: Secondary backup location</li><li><strong>CSV Export</strong>: Data format for backups</li></ul><h2 id=security--compliance>Security & Compliance</h2><ul><li>Airtable Security Features:<ul><li>ISO/IEC 27001:2013 certification</li><li>SOC 2 compliance</li><li>GDPR compliance</li></ul></li></ul><h2 id=web-application>Web Application</h2><ul><li><strong>Public-facing website</strong>: <a href=https://www.cold.global>https://www.cold.global</a></li><li><strong>Content Delivery</strong>: Details not specified in DMP</li><li><strong>Authentication</strong>: Role-based access for administration</li></ul></div></main></main><footer></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" href="https://choiceoflawdataverse.blob.core.windows.net/assets/favicon/favicon.ico" type="image/x-icon">
+<title>Technology Stack | CoLD Tech Wiki</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+      <script src="/js/main.js"></script>
+
+
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <header>
+    <div class="header-bar">
+  <div class="header-bar-row">
+    <div class="header-bar-logo">
+      <img src="https://choiceoflawdataverse.blob.core.windows.net/assets/cold_logo.svg" alt="CoLD Logo" />
+    </div>
+    <nav class="header-bar-nav">
+      <ul>
+        <li><a href="/">Overview</a></li>
+        <li><a href="/data/">Data</a></li>
+        <li><a href="/search-algorithm/">Search Algorithm</a></li>
+        <li><a href="/architecture/">Architecture</a></li>
+        <li><a href="/stack/">Technology</a></li>
+        <li><a href="/deployment/">Deployment</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+  </header>
+  <main>
+    
+<main class="container">
+  
+  <div class="content">
+    <h1 id="technology-stack">Technology Stack</h1>
+<h2 id="database-technologies">Database Technologies</h2>
+<h3 id="primary-data-storage">Primary Data Storage</h3>
+<ul>
+<li><strong>Airtable</strong>
+<ul>
+<li>Plus Plan subscription</li>
+<li>Capacity for ~15,000 records per base</li>
+<li>5GB attachment storage per base</li>
+<li>Relational database structure</li>
+<li>Cloud-synced with Amazon Web Services infrastructure</li>
+</ul>
+</li>
+</ul>
+<h3 id="secondary-database">Secondary Database</h3>
+<ul>
+<li><strong>PostgreSQL</strong> on Azure
+<ul>
+<li>Stores data for public web interface</li>
+<li>Synchronized with selected Airtable data</li>
+</ul>
+</li>
+</ul>
+<h2 id="cloud-infrastructure">Cloud Infrastructure</h2>
+<ul>
+<li><strong>Microsoft Azure</strong>
+<ul>
+<li><strong>Azure Container Apps</strong>: Hosts containerized application components</li>
+<li><strong>Azure Kubernetes Service</strong>: Orchestrates containers for scalability</li>
+<li><strong>Azure PostgreSQL</strong>: Managed database service</li>
+</ul>
+</li>
+</ul>
+<h2 id="development-tools">Development Tools</h2>
+<ul>
+<li><strong>Airtable API</strong>: For programmatic access to database content</li>
+<li><strong>Airtable Scripting Extension</strong>: For metadata collection and automation</li>
+</ul>
+<h2 id="backup-tools">Backup Tools</h2>
+<ul>
+<li><strong>SwitchDrive</strong>: University-provided cloud storage</li>
+<li><strong>OneDrive</strong>: Secondary backup location</li>
+<li><strong>CSV Export</strong>: Data format for backups</li>
+</ul>
+<h2 id="security--compliance">Security &amp; Compliance</h2>
+<ul>
+<li>Airtable Security Features:
+<ul>
+<li>ISO/IEC 27001:2013 certification</li>
+<li>SOC 2 compliance</li>
+<li>GDPR compliance</li>
+</ul>
+</li>
+</ul>
+<h2 id="web-application">Web Application</h2>
+<ul>
+<li><strong>Public-facing website</strong>: <a href="https://www.cold.global">https://www.cold.global</a></li>
+<li><strong>Content Delivery</strong>: Details not specified in DMP</li>
+<li><strong>Authentication</strong>: Role-based access for administration</li>
+</ul>
+
+  </div>
+</main>
+
+  </main>
+  <footer>
+    
+
+<footer class="cold-footer">
+  <div class="cold-footer-content">
+    <div class="cold-footer-title">Choice of Law<br>Dataverse</div>
+    <div class="cold-footer-funding">Funded by the<br>Swiss National Science Foundation</div>
+  </div>
+</footer>
+
+  </footer>
+</body>
+</html>

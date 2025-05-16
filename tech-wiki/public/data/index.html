@@ -1,2 +1,139 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><link rel=icon href=https://choiceoflawdataverse.blob.core.windows.net/assets/favicon/favicon.ico type=image/x-icon><title>Data Structure and Management | CoLD Tech Wiki</title>
-<link rel=stylesheet href=/css/main.min.84db4fb04dcac264860c2b401a8e30cbb644aaf337fd7e68cab6a129816b78d4.css integrity="sha256-hNtPsE3KwmSGDCtAGo4wy7ZEqvM3/X5oyrahKYFreNQ=" crossorigin=anonymous><script src=/js/main.23cd0c7d837263b9eaeb96ee2d9ccfa2969daa3fa00fa1c1fe8701a9b87251a1.js integrity="sha256-I80MfYNyY7nq65buLZzPopadqj+gD6HB/ocBqbhyUaE=" crossorigin=anonymous></script><link rel=stylesheet href=/css/main.css></head><body><header><div class=header-bar><div class=header-bar-row><div class=header-bar-logo><img src=https://choiceoflawdataverse.blob.core.windows.net/assets/cold_logo.svg alt="CoLD Logo"></div><nav class=header-bar-nav><ul><li><a href=/>Overview</a></li><li><a href=/data/>Data</a></li><li><a href=/search-algorithm/>Search Algorithm</a></li><li><a href=/architecture/>Architecture</a></li><li><a href=/stack/>Technology</a></li><li><a href=/deployment/>Deployment</a></li></ul></nav></div></div></header><main><main class=container><div class=content><h1 id=data-structure-and-management>Data Structure and Management</h1><h2 id=database-structure>Database Structure</h2><p>The database is organized into multiple related tables that store different types of legal information:</p><h3 id=main-data-tables>Main Data Tables</h3><ol><li><strong>Answers</strong> (14,942 records)</li><li><strong>HCCH Answers</strong> (20 records)</li><li><strong>Domestic Instruments</strong> (195 records)</li><li><strong>Domestic Legal Provisions</strong> (99 records)</li><li><strong>Regional Instruments</strong> (6 records)</li><li><strong>Regional Legal Provisions</strong> (129 records)</li><li><strong>International Instruments</strong> (1 record)</li><li><strong>International Legal Provisions</strong> (22 records)</li><li><strong>Court Decisions</strong> (1,321 records)</li><li><strong>Arbitral Institutions</strong> (28 records)</li><li><strong>Arbitral Rules</strong> (28 records)</li><li><strong>Arbitral Awards</strong> (67 records)</li><li><strong>Literature</strong> (217 records)</li></ol><h3 id=metadata-tables>Metadata Tables</h3><ol><li><strong>Themes</strong> (15 records)</li><li><strong>Questions</strong> (61 records)</li><li><strong>Jurisdictions</strong> (249 records)</li><li><strong>Topics</strong> (0 records)</li><li><strong>Glossary</strong> (29 records)</li><li><strong>Abbreviations</strong> (60 records)</li><li><strong>Specialists</strong> (68 records)</li></ol><h2 id=airtable-configuration>Airtable Configuration</h2><h3 id=components>Components</h3><ul><li><strong>Base</strong>: Collection of all data tables</li><li><strong>Table</strong>: Individual data tables within the base</li><li><strong>Field</strong>: Columns within tables (various data types)</li><li><strong>Record</strong>: Individual rows within tables</li><li><strong>Views</strong>: Saved configurations of filtered, sorted, or grouped data</li></ul><h3 id=naming-conventions>Naming Conventions</h3><ul><li>Table and Field names follow title case capitalization per APA guidelines</li><li>&ldquo;Linked&rdquo; columns are named <code>&lt;TABLE NAME> "Link"</code></li><li>Lookup columns are named <code>&lt;TABLE NAME> &lt;COLUMN NAME></code></li></ul><h2 id=data-entry-rules>Data Entry Rules</h2><h3 id=for-answersquestionsjurisdictions-tables>For Answers/Questions/Jurisdictions Tables</h3><ol><li>Use search/filter/group functions to locate records</li><li>Edit existing fields as needed</li><li>Do not add new entries to these tables</li><li>For answers, select from predefined dropdown options</li></ol><h3 id=for-legal-provisionscourt-decisionsarbitral-awards-tables>For Legal Provisions/Court Decisions/Arbitral Awards Tables</h3><ol><li>Add new records as needed</li><li>Edit existing information directly in the relevant fields</li></ol><h3 id=for-concepts>For Concepts</h3><ul><li>Edit existing fields</li><li>Use &ldquo;Assignee&rdquo; column to define responsibilities</li></ul><h2 id=file-storage>File Storage</h2><p>In addition to structured data in Airtable:</p><ul><li>Original PDF files are stored in folders organized by region > country/region with an ID number</li><li>File naming convention: YEAR_COURT_CHAMBER OR CIRCUIT_NAME OF THE CASE, e.g., &ldquo;1976_United States Court of Appeals_Fifth Circuit_Baruch Foster Corporation v Imperial Ethiopian Government&rdquo;</li></ul><h2 id=version-control>Version Control</h2><ul><li>Airtable provides record-level revision history for six months</li><li>Shows who made changes and what was modified</li><li>Comments remain in the activity feed until manually deleted</li></ul><h2 id=data-volume>Data Volume</h2><ul><li>Structured data: Less than 100MB</li><li>PDF attachments: Additional 5-10GB</li></ul></div></main></main><footer></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" href="https://choiceoflawdataverse.blob.core.windows.net/assets/favicon/favicon.ico" type="image/x-icon">
+<title>Data Structure and Management | CoLD Tech Wiki</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+      <script src="/js/main.js"></script>
+
+
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <header>
+    <div class="header-bar">
+  <div class="header-bar-row">
+    <div class="header-bar-logo">
+      <img src="https://choiceoflawdataverse.blob.core.windows.net/assets/cold_logo.svg" alt="CoLD Logo" />
+    </div>
+    <nav class="header-bar-nav">
+      <ul>
+        <li><a href="/">Overview</a></li>
+        <li><a href="/data/">Data</a></li>
+        <li><a href="/search-algorithm/">Search Algorithm</a></li>
+        <li><a href="/architecture/">Architecture</a></li>
+        <li><a href="/stack/">Technology</a></li>
+        <li><a href="/deployment/">Deployment</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+  </header>
+  <main>
+    
+<main class="container">
+  
+  <div class="content">
+    <h1 id="data-structure-and-management">Data Structure and Management</h1>
+<h2 id="database-structure">Database Structure</h2>
+<p>The database is organized into multiple related tables that store different types of legal information:</p>
+<h3 id="main-data-tables">Main Data Tables</h3>
+<ol>
+<li><strong>Answers</strong> (14,942 records)</li>
+<li><strong>HCCH Answers</strong> (20 records)</li>
+<li><strong>Domestic Instruments</strong> (195 records)</li>
+<li><strong>Domestic Legal Provisions</strong> (99 records)</li>
+<li><strong>Regional Instruments</strong> (6 records)</li>
+<li><strong>Regional Legal Provisions</strong> (129 records)</li>
+<li><strong>International Instruments</strong> (1 record)</li>
+<li><strong>International Legal Provisions</strong> (22 records)</li>
+<li><strong>Court Decisions</strong> (1,321 records)</li>
+<li><strong>Arbitral Institutions</strong> (28 records)</li>
+<li><strong>Arbitral Rules</strong> (28 records)</li>
+<li><strong>Arbitral Awards</strong> (67 records)</li>
+<li><strong>Literature</strong> (217 records)</li>
+</ol>
+<h3 id="metadata-tables">Metadata Tables</h3>
+<ol>
+<li><strong>Themes</strong> (15 records)</li>
+<li><strong>Questions</strong> (61 records)</li>
+<li><strong>Jurisdictions</strong> (249 records)</li>
+<li><strong>Topics</strong> (0 records)</li>
+<li><strong>Glossary</strong> (29 records)</li>
+<li><strong>Abbreviations</strong> (60 records)</li>
+<li><strong>Specialists</strong> (68 records)</li>
+</ol>
+<h2 id="airtable-configuration">Airtable Configuration</h2>
+<h3 id="components">Components</h3>
+<ul>
+<li><strong>Base</strong>: Collection of all data tables</li>
+<li><strong>Table</strong>: Individual data tables within the base</li>
+<li><strong>Field</strong>: Columns within tables (various data types)</li>
+<li><strong>Record</strong>: Individual rows within tables</li>
+<li><strong>Views</strong>: Saved configurations of filtered, sorted, or grouped data</li>
+</ul>
+<h3 id="naming-conventions">Naming Conventions</h3>
+<ul>
+<li>Table and Field names follow title case capitalization per APA guidelines</li>
+<li>&ldquo;Linked&rdquo; columns are named <code>&lt;TABLE NAME&gt; &quot;Link&quot;</code></li>
+<li>Lookup columns are named <code>&lt;TABLE NAME&gt; &lt;COLUMN NAME&gt;</code></li>
+</ul>
+<h2 id="data-entry-rules">Data Entry Rules</h2>
+<h3 id="for-answersquestionsjurisdictions-tables">For Answers/Questions/Jurisdictions Tables</h3>
+<ol>
+<li>Use search/filter/group functions to locate records</li>
+<li>Edit existing fields as needed</li>
+<li>Do not add new entries to these tables</li>
+<li>For answers, select from predefined dropdown options</li>
+</ol>
+<h3 id="for-legal-provisionscourt-decisionsarbitral-awards-tables">For Legal Provisions/Court Decisions/Arbitral Awards Tables</h3>
+<ol>
+<li>Add new records as needed</li>
+<li>Edit existing information directly in the relevant fields</li>
+</ol>
+<h3 id="for-concepts">For Concepts</h3>
+<ul>
+<li>Edit existing fields</li>
+<li>Use &ldquo;Assignee&rdquo; column to define responsibilities</li>
+</ul>
+<h2 id="file-storage">File Storage</h2>
+<p>In addition to structured data in Airtable:</p>
+<ul>
+<li>Original PDF files are stored in folders organized by region &gt; country/region with an ID number</li>
+<li>File naming convention: YEAR_COURT_CHAMBER OR CIRCUIT_NAME OF THE CASE, e.g., &ldquo;1976_United States Court of Appeals_Fifth Circuit_Baruch Foster Corporation v Imperial Ethiopian Government&rdquo;</li>
+</ul>
+<h2 id="version-control">Version Control</h2>
+<ul>
+<li>Airtable provides record-level revision history for six months</li>
+<li>Shows who made changes and what was modified</li>
+<li>Comments remain in the activity feed until manually deleted</li>
+</ul>
+<h2 id="data-volume">Data Volume</h2>
+<ul>
+<li>Structured data: Less than 100MB</li>
+<li>PDF attachments: Additional 5-10GB</li>
+</ul>
+
+  </div>
+</main>
+
+  </main>
+  <footer>
+    
+
+<footer class="cold-footer">
+  <div class="cold-footer-content">
+    <div class="cold-footer-title">Choice of Law<br>Dataverse</div>
+    <div class="cold-footer-funding">Funded by the<br>Swiss National Science Foundation</div>
+  </div>
+</footer>
+
+  </footer>
+</body>
+</html>
