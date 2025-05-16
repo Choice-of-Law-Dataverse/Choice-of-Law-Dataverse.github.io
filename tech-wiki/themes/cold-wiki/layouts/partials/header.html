@@ -1,12 +1,17 @@
-<div class="header-bar" style="display: flex; align-items: center; justify-content: space-between; margin: 1rem 2rem 1rem 2rem;">
-  <h1 style="margin: 0; font-size: 2rem; font-weight: 700; color: var(--color-cold-night);">{{ site.Title }}</h1>
-  <nav>
-    <ul style="display: flex; gap: 2rem; margin: 0; padding: 0; list-style: none;">
-      <li><a href="/">Overview</a></li>
-      <li><a href="/architecture/">System Architecture</a></li>
-      <li><a href="/stack/">Technology Stack</a></li>
-      <li><a href="/deployment/">Deployment Guide</a></li>
-      <li><a href="/data/">Data Structure and Management</a></li>
-    </ul>
-  </nav>
+<div class="header-bar">
+  <div class="header-bar-row">
+    <div class="header-bar-logo">
+      <img src="https://choiceoflawdataverse.blob.core.windows.net/assets/cold_logo.svg" alt="CoLD Logo" />
+    </div>
+    <nav class="header-bar-nav">
+      <ul>
+        <li{{ if eq .RelPermalink "/" }} class="active"{{ end }}><a href="/">Overview</a></li>
+        <li{{ if eq .RelPermalink "/data/" }} class="active"{{ end }}><a href="/data/">Data</a></li>
+        <li{{ if eq .RelPermalink "/search-algorithm/" }} class="active"{{ end }}><a href="/search-algorithm/">Search Algorithm</a></li>
+        <li{{ if eq .RelPermalink "/architecture/" }} class="active"{{ end }}><a href="/architecture/">Architecture</a></li>
+        <li{{ if eq .RelPermalink "/stack/" }} class="active"{{ end }}><a href="/stack/">Technology</a></li>
+        <li{{ if eq .RelPermalink "/deployment/" }} class="active"{{ end }}><a href="/deployment/">Deployment</a></li>
+      </ul>
+    </nav>
+  </div>
 </div>
