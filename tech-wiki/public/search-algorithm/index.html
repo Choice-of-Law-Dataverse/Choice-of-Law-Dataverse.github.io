@@ -1,12 +1,155 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><link rel=icon href=https://choiceoflawdataverse.blob.core.windows.net/assets/favicon/favicon.ico type=image/x-icon><title>Search Algorithm | CoLD Tech Wiki</title>
-<link rel=stylesheet href=/css/main.min.4bd294273ee16bd50b5674129ac3eb25c27e6d0e5b2856848a9758122b6a0591.css integrity="sha256-S9KUJz7ha9ULVnQSmsPrJcJ+bQ5bKFaEipdYEitqBZE=" crossorigin=anonymous><script src=/js/main.23cd0c7d837263b9eaeb96ee2d9ccfa2969daa3fa00fa1c1fe8701a9b87251a1.js integrity="sha256-I80MfYNyY7nq65buLZzPopadqj+gD6HB/ocBqbhyUaE=" crossorigin=anonymous></script><link rel=stylesheet href=/css/main.css></head><body><header><div class=header-bar><div class=header-bar-row><div class=header-bar-logo><img src=https://choiceoflawdataverse.blob.core.windows.net/assets/cold_logo.svg alt="CoLD Logo"></div><nav class=header-bar-nav><ul><li><a href=/>Overview</a></li><li><a href=/data/>Data</a></li><li class=active><a href=/search-algorithm/>Search Algorithm</a></li><li><a href=/architecture/>Architecture</a></li><li><a href=/stack/>Technology</a></li><li><a href=/deployment/>Deployment</a></li></ul></nav></div></div></header><main><main class=container><div class=content><h1 id=search-algorithm>Search Algorithm</h1><p>We use the PostgreSQL Full Text Search feature to build the search engine, which lets our users query the data in our database.</p><p>PostgreSQL, also called Postgres, is a relational database. Relational database means, that data is stored in a structured format, representing tables and columns. Postgres has an integrated feature called &ldquo;Full Text Search&rdquo;, which allows to query the database and the data entries stored within by using textual queries (as opposed to using Structured Query Language (SQL), which has sophisticated methods of querying databases that are just as manifold in what can be achieved with them as they are complex in handling).
-General functionality</p><p>The Postgres Full Text Search works by comparing an input document (textual user query) with the data found in the database. It is unfeasible to use the raw data as it would be found in the database directly. Instead, the individual entries from a database table have to be translated into a list of documents. The following preparation steps make it possible to use the Postgres Full Text Search feature:</p><ol><li>creating searchable documents</li></ol><p>Take every row of a table you want to search. Each of these rows has to be turned into a searchable document. To make a row searchable, you first select the columns you deem fit for including their entries in the searchable content. Then, you transform the text into a list of tokens, more specifically: lexemes (basically word stems). This list of lexemes has been cleaned for stop words and each lexeme is complemented with its position in the original text. Imagine you had a sentence &ldquo;The court has decided on party autonomy and arbitration in Switzerland.&rdquo;. This sentence would be transformed into a list that looks like this: &lsquo;arbitr&rsquo;:9 &lsquo;autonomi&rsquo;:7 &lsquo;court&rsquo;:2 &lsquo;decid&rsquo;:4 &lsquo;parti&rsquo;:6 &lsquo;switzerland&rsquo;:11</p><pre tabindex=0><code>SELECT to_tsvector(&#39;The court has decided on party autonomy and arbitration in Switzerland.&#39;);
-</code></pre><ol start=2><li>parsing textual user queries</li></ol><p>This list can now be used for comparison. To compare it with a textual user query, each query will have to undergo a transformation process similar as in step 1. Searching for &ldquo;court decision on party autonomy&rdquo; would thus be turned into &lsquo;court&rsquo; & &lsquo;decis&rsquo; & &lsquo;parti&rsquo; & &lsquo;autonomi&rsquo;. Note that for user queries, the position of words within the original text is not stored.</p><pre tabindex=0><code>SELECT to_tsquery(&#39;court &amp; decision &amp; on &amp; party &amp; autonomy&#39;);
-</code></pre><ol start=3><li>matching documents with queries</li></ol><p>Finally, we can match the transformed query with all searchable documents in list form available and return whether there is infact a match or not. For some further granularity, we can score each comparison by measuring how relevant each document is to the query. Following the previous examples, matching and ranking the query from step 2 with the searchable document from step 1, returns a ranking score of 0.25948015. Simple comparison:</p><pre tabindex=0><code>SELECT to_tsquery(&#39;court &amp; decision &amp; on &amp; party &amp; autonomy&#39;) @@ to_tsvector(&#39;The court has decided on party autonomy and arbitration in Switzerland.&#39;);
-</code></pre><p>Ranking:</p><pre tabindex=0><code>SELECT
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" href="https://choiceoflawdataverse.blob.core.windows.net/assets/favicon/favicon.ico" type="image/x-icon">
+<title>Search Algorithm | CoLD Tech Wiki</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+      <script src="/js/main.js"></script>
+
+
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <header>
+    <div class="header-bar">
+  <div class="header-bar-row">
+    <div class="header-bar-logo">
+      <img src="https://choiceoflawdataverse.blob.core.windows.net/assets/cold_logo.svg" alt="CoLD Logo" />
+    </div>
+    <nav class="header-bar-nav">
+      <ul>
+        <li><a href="/">Overview</a></li>
+        <li><a href="/data/">Data</a></li>
+        <li class="active"><a href="/search-algorithm/">Search Algorithm</a></li>
+        <li><a href="/architecture/">Architecture</a></li>
+        <li><a href="/stack/">Technology</a></li>
+        <li><a href="/deployment/">Deployment</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+  </header>
+  <main>
+    
+<main class="container">
+  
+  <div class="content">
+    <h1 id="search-algorithm">Search Algorithm</h1>
+<p>We use the PostgreSQL Full Text Search feature to build the search engine, which lets our users query the data in our database.</p>
+<p>PostgreSQL, also called Postgres, is a relational database. Relational database means, that data is stored in a structured format, representing tables and columns. Postgres has an integrated feature called &ldquo;Full Text Search&rdquo;, which allows to query the database and the data entries stored within by using textual queries (as opposed to using Structured Query Language (SQL), which has sophisticated methods of querying databases that are just as manifold in what can be achieved with them as they are complex in handling).
+General functionality</p>
+<p>The Postgres Full Text Search works by comparing an input document (textual user query) with the data found in the database. It is unfeasible to use the raw data as it would be found in the database directly. Instead, the individual entries from a database table have to be translated into a list of documents. The following preparation steps make it possible to use the Postgres Full Text Search feature:</p>
+<ol>
+<li>creating searchable documents</li>
+</ol>
+<p>Take every row of a table you want to search. Each of these rows has to be turned into a searchable document. To make a row searchable, you first select the columns you deem fit for including their entries in the searchable content. Then, you transform the text into a list of tokens, more specifically: lexemes (basically word stems). This list of lexemes has been cleaned for stop words and each lexeme is complemented with its position in the original text. Imagine you had a sentence &ldquo;The court has decided on party autonomy and arbitration in Switzerland.&rdquo;. This sentence would be transformed into a list that looks like this: &lsquo;arbitr&rsquo;:9 &lsquo;autonomi&rsquo;:7 &lsquo;court&rsquo;:2 &lsquo;decid&rsquo;:4 &lsquo;parti&rsquo;:6 &lsquo;switzerland&rsquo;:11</p>
+<pre tabindex="0"><code>SELECT to_tsvector(&#39;The court has decided on party autonomy and arbitration in Switzerland.&#39;);
+</code></pre><ol start="2">
+<li>parsing textual user queries</li>
+</ol>
+<p>This list can now be used for comparison. To compare it with a textual user query, each query will have to undergo a transformation process similar as in step 1. Searching for &ldquo;court decision on party autonomy&rdquo; would thus be turned into &lsquo;court&rsquo; &amp; &lsquo;decis&rsquo; &amp; &lsquo;parti&rsquo; &amp; &lsquo;autonomi&rsquo;. Note that for user queries, the position of words within the original text is not stored.</p>
+<pre tabindex="0"><code>SELECT to_tsquery(&#39;court &amp; decision &amp; on &amp; party &amp; autonomy&#39;);
+</code></pre><ol start="3">
+<li>matching documents with queries</li>
+</ol>
+<p>Finally, we can match the transformed query with all searchable documents in list form available and return whether there is infact a match or not. For some further granularity, we can score each comparison by measuring how relevant each document is to the query. Following the previous examples, matching and ranking the query from step 2 with the searchable document from step 1, returns a ranking score of 0.25948015. Simple comparison:</p>
+<pre tabindex="0"><code>SELECT to_tsquery(&#39;court &amp; decision &amp; on &amp; party &amp; autonomy&#39;) @@ to_tsvector(&#39;The court has decided on party autonomy and arbitration in Switzerland.&#39;);
+</code></pre><p>Ranking:</p>
+<pre tabindex="0"><code>SELECT
     ts_rank(
         to_tsvector(&#39;The court has decided on party autonomy and arbitration in Switzerland.&#39;),
         to_tsquery(&#39;court &amp; decision &amp; on &amp; party &amp; autonomy&#39;)
         --to_tsquery(&#39;party &amp; autonomy&#39;)
         )
-</code></pre><h2 id=implementation-in-cold>Implementation in CoLD</h2><p>The way in which the Postgres Full Text Search feature has been implemented is by enabling Full Text Search for multiple tables in order to search each of them with the same query. The Full Text Search then returns a joint list of results with data entries from all searched tables in order of how well their ranking score matches the textual user query. Here I am providing an overview for which columns have been selected with which priority for the tables that can be searched using the full text feature. Note that each column to be included for text search can be weighted using weights (A, B, C, D), with A being the highest and D the lowest weight.</p><ol><li><strong>&ldquo;Answers&rdquo; table</strong></li></ol><ul><li>Question (A)</li><li>Jurisdictions (A)</li><li>More information (B)</li><li>Themes (C)</li></ul><ol start=2><li><strong>&ldquo;HCCH Answers&rdquo; table</strong></li></ol><ul><li>Adapted Question (A)</li><li>International Instruments (A)</li><li>Themes (B)</li></ul><ol start=2><li><strong>&ldquo;Court decisions&rdquo; table</strong></li></ol><ul><li>Case Citation (A)</li><li>Jurisdictions (A)</li><li>English translation (B)</li><li>Answers Question (C)</li></ul><ol start=3><li><strong>&ldquo;Domestic Instruments&rdquo; table</strong></li></ol><ul><li>Title (in English) (A)</li><li>Official Title (A)</li><li>Jurisdictions (B)</li><li>Publication Date (B)</li><li>Entry Into Force (B)</li><li>Full Text of the Provisions (C)</li><li>Domestic Legal Provisions Full Text of the Provision (Original Language) (C)</li><li>Domestic Legal Provisions Full Text of the Provision (English Translation) (C)</li></ul><ol start=4><li><strong>&ldquo;Regional Instruments&rdquo; table</strong></li></ol><ul><li>Abbrevation (A)</li><li>Title (B)</li><li>Specialists (B)</li><li>Date (C)</li></ul><ol start=5><li><strong>&ldquo;International Instruments&rdquo; table</strong></li></ol><ul><li>Name (A)</li><li>Specialists (B)</li><li>Date (C)</li></ul><ol start=6><li><strong>&ldquo;Literature&rdquo; table</strong></li></ol><ul><li>Title (A)</li><li>Author (A)</li><li>Publication Title (B)</li><li>Publication Year (C)</li></ul><p>For every row in each table, the respective combination of the values from all specified columns becomes one searchable document. For each table, the match between search query and searchable documents is made separately. Once the matches and ranks are calculated for each table, they are joined into one list. This list is the final result of the search results.</p></div></main></main><footer><footer class=cold-footer><div class=cold-footer-content><div class=cold-footer-title>Choice of Law<br>Dataverse</div><div class=cold-footer-funding>Funded by the<br>Swiss National Science Foundation</div></div></footer></footer></body></html>
+</code></pre><h2 id="implementation-in-cold">Implementation in CoLD</h2>
+<p>The way in which the Postgres Full Text Search feature has been implemented is by enabling Full Text Search for multiple tables in order to search each of them with the same query. The Full Text Search then returns a joint list of results with data entries from all searched tables in order of how well their ranking score matches the textual user query. Here I am providing an overview for which columns have been selected with which priority for the tables that can be searched using the full text feature. Note that each column to be included for text search can be weighted using weights (A, B, C, D), with A being the highest and D the lowest weight.</p>
+<ol>
+<li><strong>&ldquo;Answers&rdquo; table</strong></li>
+</ol>
+<ul>
+<li>Question (A)</li>
+<li>Jurisdictions (A)</li>
+<li>More information (B)</li>
+<li>Themes (C)</li>
+</ul>
+<ol start="2">
+<li><strong>&ldquo;HCCH Answers&rdquo; table</strong></li>
+</ol>
+<ul>
+<li>Adapted Question (A)</li>
+<li>International Instruments (A)</li>
+<li>Themes (B)</li>
+</ul>
+<ol start="2">
+<li><strong>&ldquo;Court decisions&rdquo; table</strong></li>
+</ol>
+<ul>
+<li>Case Citation (A)</li>
+<li>Jurisdictions (A)</li>
+<li>English translation (B)</li>
+<li>Answers Question (C)</li>
+</ul>
+<ol start="3">
+<li><strong>&ldquo;Domestic Instruments&rdquo; table</strong></li>
+</ol>
+<ul>
+<li>Title (in English) (A)</li>
+<li>Official Title (A)</li>
+<li>Jurisdictions (B)</li>
+<li>Publication Date (B)</li>
+<li>Entry Into Force (B)</li>
+<li>Full Text of the Provisions (C)</li>
+<li>Domestic Legal Provisions Full Text of the Provision (Original Language) (C)</li>
+<li>Domestic Legal Provisions Full Text of the Provision (English Translation) (C)</li>
+</ul>
+<ol start="4">
+<li><strong>&ldquo;Regional Instruments&rdquo; table</strong></li>
+</ol>
+<ul>
+<li>Abbrevation (A)</li>
+<li>Title (B)</li>
+<li>Specialists (B)</li>
+<li>Date (C)</li>
+</ul>
+<ol start="5">
+<li><strong>&ldquo;International Instruments&rdquo; table</strong></li>
+</ol>
+<ul>
+<li>Name (A)</li>
+<li>Specialists (B)</li>
+<li>Date (C)</li>
+</ul>
+<ol start="6">
+<li><strong>&ldquo;Literature&rdquo; table</strong></li>
+</ol>
+<ul>
+<li>Title (A)</li>
+<li>Author (A)</li>
+<li>Publication Title (B)</li>
+<li>Publication Year (C)</li>
+</ul>
+<p>For every row in each table, the respective combination of the values from all specified columns becomes one searchable document. For each table, the match between search query and searchable documents is made separately. Once the matches and ranks are calculated for each table, they are joined into one list. This list is the final result of the search results.</p>
+
+  </div>
+</main>
+
+  </main>
+  <footer>
+    
+
+<footer class="cold-footer">
+  <div class="cold-footer-content">
+    <div class="cold-footer-title">Choice of Law<br>Dataverse</div>
+    <div class="cold-footer-funding">Funded by the<br>Swiss National Science Foundation</div>
+  </div>
+</footer>
+
+  </footer>
+</body>
+</html>
