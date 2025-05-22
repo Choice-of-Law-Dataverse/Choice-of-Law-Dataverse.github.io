@@ -118,6 +118,13 @@ a {
   font-weight: 400 !important;
 }
 
+.prose pre,
+.prose code {
+  white-space: pre-wrap;      /* wrap instead of only on line breaks */
+  word-wrap: break-word;      /* break long words/URLs */
+  overflow-wrap: anywhere;    /* newer spec, breaks at any opportunity */
+}
+
 main {
   flex: 1 0 auto;
   padding: 2rem 2.5rem;
@@ -160,8 +167,17 @@ main {
 
 /* Responsive adjustments for mobile devices */
 @media (max-width: 768px) {
+  .html,
+  body {
+    font-size: 16px !important; /* Adjust font size for mobile */
+    padding: 0 !important; /* Remove padding for mobile */
+    margin: 0 !important; /* Remove margin for mobile */
+    height: auto !important; /* Allow content to dictate height */
+  }
+
   .container {
     width: 95vw !important;
+    margin: 0 !important;
     padding: 1rem !important;
     display: block !important; /* Ensure full width on mobile */
   }
