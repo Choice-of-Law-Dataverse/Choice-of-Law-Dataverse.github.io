@@ -11,29 +11,29 @@ The database is organized into multiple related tables that store different type
 
 ### Main Data Tables
 
-1. **Answers** (14,942 records)
-2. **HCCH Answers** (20 records)
-3. **Domestic Instruments** (195 records)
-4. **Domestic Legal Provisions** (99 records)
-5. **Regional Instruments** (6 records)
-6. **Regional Legal Provisions** (129 records)
-7. **International Instruments** (1 record)
-8. **International Legal Provisions** (22 records)
-9. **Court Decisions** (1,321 records)
-10. **Arbitral Institutions** (28 records)
-11. **Arbitral Rules** (28 records)
-12. **Arbitral Awards** (67 records)
-13. **Literature** (217 records)
+1. **Answers**
+2. **HCCH Answers**
+3. **Domestic Instruments**
+4. **Domestic Legal Provisions**
+5. **Regional Instruments**
+6. **Regional Legal Provisions**
+7. **International Instruments**
+8. **International Legal Provisions**
+9. **Court Decisions**
+10. **Arbitral Institutions**
+11. **Arbitral Rules**
+12. **Arbitral Awards**
+13. **Literature**
 
 ### Metadata Tables
 
-1. **Themes** (15 records)
-2. **Questions** (61 records)
-3. **Jurisdictions** (249 records)
-4. **Topics** (0 records)
-5. **Glossary** (29 records)
-6. **Abbreviations** (60 records)
-7. **Specialists** (68 records)
+1. **Themes**
+2. **Questions**
+3. **Jurisdictions**
+4. **Topics**
+5. **Glossary**
+6. **Abbreviations**
+7. **Specialists**
 
 ## Airtable Configuration
 
@@ -67,15 +67,9 @@ The database is organized into multiple related tables that store different type
 
 ## File Storage
 
-In addition to structured data in Airtable:
-- Original PDF files are stored in folders organized by region > country/region with an ID number
-- File naming convention: YEAR_COURT_CHAMBER OR CIRCUIT_NAME OF THE CASE, e.g., "1976_United States Court of Appeals_Fifth Circuit_Baruch Foster Corporation v Imperial Ethiopian Government"
-
-## Version Control
-
-- Airtable provides record-level revision history for six months
-- Shows who made changes and what was modified
-- Comments remain in the activity feed until manually deleted
+In addition to structured data in NocoDB:
+- Original PDF files are stored in an Azure storage account named with their respective CoLD ID
+- File naming convention: follows the CoLD ID logic, i.e. "CD-CHE-1020"
 
 ## Data Volume
 

@@ -45,29 +45,29 @@
 <p>The database is organized into multiple related tables that store different types of legal information:</p>
 <h3 id="main-data-tables">Main Data Tables</h3>
 <ol>
-<li><strong>Answers</strong> (14,942 records)</li>
-<li><strong>HCCH Answers</strong> (20 records)</li>
-<li><strong>Domestic Instruments</strong> (195 records)</li>
-<li><strong>Domestic Legal Provisions</strong> (99 records)</li>
-<li><strong>Regional Instruments</strong> (6 records)</li>
-<li><strong>Regional Legal Provisions</strong> (129 records)</li>
-<li><strong>International Instruments</strong> (1 record)</li>
-<li><strong>International Legal Provisions</strong> (22 records)</li>
-<li><strong>Court Decisions</strong> (1,321 records)</li>
-<li><strong>Arbitral Institutions</strong> (28 records)</li>
-<li><strong>Arbitral Rules</strong> (28 records)</li>
-<li><strong>Arbitral Awards</strong> (67 records)</li>
-<li><strong>Literature</strong> (217 records)</li>
+<li><strong>Answers</strong></li>
+<li><strong>HCCH Answers</strong></li>
+<li><strong>Domestic Instruments</strong></li>
+<li><strong>Domestic Legal Provisions</strong></li>
+<li><strong>Regional Instruments</strong></li>
+<li><strong>Regional Legal Provisions</strong></li>
+<li><strong>International Instruments</strong></li>
+<li><strong>International Legal Provisions</strong></li>
+<li><strong>Court Decisions</strong></li>
+<li><strong>Arbitral Institutions</strong></li>
+<li><strong>Arbitral Rules</strong></li>
+<li><strong>Arbitral Awards</strong></li>
+<li><strong>Literature</strong></li>
 </ol>
 <h3 id="metadata-tables">Metadata Tables</h3>
 <ol>
-<li><strong>Themes</strong> (15 records)</li>
-<li><strong>Questions</strong> (61 records)</li>
-<li><strong>Jurisdictions</strong> (249 records)</li>
-<li><strong>Topics</strong> (0 records)</li>
-<li><strong>Glossary</strong> (29 records)</li>
-<li><strong>Abbreviations</strong> (60 records)</li>
-<li><strong>Specialists</strong> (68 records)</li>
+<li><strong>Themes</strong></li>
+<li><strong>Questions</strong></li>
+<li><strong>Jurisdictions</strong></li>
+<li><strong>Topics</strong></li>
+<li><strong>Glossary</strong></li>
+<li><strong>Abbreviations</strong></li>
+<li><strong>Specialists</strong></li>
 </ol>
 <h2 id="airtable-configuration">Airtable Configuration</h2>
 <h3 id="components">Components</h3>
@@ -103,16 +103,10 @@
 <li>Use &ldquo;Assignee&rdquo; column to define responsibilities</li>
 </ul>
 <h2 id="file-storage">File Storage</h2>
-<p>In addition to structured data in Airtable:</p>
+<p>In addition to structured data in NocoDB:</p>
 <ul>
-<li>Original PDF files are stored in folders organized by region &gt; country/region with an ID number</li>
-<li>File naming convention: YEAR_COURT_CHAMBER OR CIRCUIT_NAME OF THE CASE, e.g., &ldquo;1976_United States Court of Appeals_Fifth Circuit_Baruch Foster Corporation v Imperial Ethiopian Government&rdquo;</li>
-</ul>
-<h2 id="version-control">Version Control</h2>
-<ul>
-<li>Airtable provides record-level revision history for six months</li>
-<li>Shows who made changes and what was modified</li>
-<li>Comments remain in the activity feed until manually deleted</li>
+<li>Original PDF files are stored in an Azure storage account named with their respective CoLD ID</li>
+<li>File naming convention: follows the CoLD ID logic, i.e. &ldquo;CD-CHE-1020&rdquo;</li>
 </ul>
 <h2 id="data-volume">Data Volume</h2>
 <ul>

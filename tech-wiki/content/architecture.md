@@ -10,17 +10,16 @@ draft: false
 The COLD platform uses a multi-tier architecture:
 
 1. **Data Layer**: 
-   - Primary data storage in Airtable cloud database
-   - PostgreSQL database for the public-facing web application
+   - PostgreSQL database for data storage and direct integration with NocoDB and web app
 
 2. **Application Layer**:
-   - API interface to Airtable for data management
+   - API interface to PostgreSQL
    - Custom web application for public access
    - Container-based microservices for specific functionality
 
 3. **Presentation Layer**:
-   - Web interface accessible at cold.global
-   - Administrative interface for research team
+   - Web interface accessible at https://cold.global
+   - Administrative interface for research team (NocoDB)
 
 ## Database Architecture
 
@@ -28,11 +27,4 @@ The system uses a relational database model with multiple interconnected tables.
 
 ### Key Components
 
-Airtable Base --> PostgreSQL DB --> FastAPI Backend --> Public Facing Nuxt.js Frontend
-
-## Backup System
-
-- Regular exports from Airtable to CSV format
-- Storage of backups on SwitchDrive and OneDrive
-- Automated backup procedures for data consistency
-- Retention of historical data for at least five years
+NocoDB --> PostgreSQL DB --> FastAPI Backend --> Public Facing Nuxt.js Frontend

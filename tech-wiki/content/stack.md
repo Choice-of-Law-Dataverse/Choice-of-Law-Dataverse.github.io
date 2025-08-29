@@ -8,43 +8,22 @@ draft: false
 ## Database Technologies
 
 ### Primary Data Storage
-- **Airtable**
-  - Plus Plan subscription
-  - Capacity for ~15,000 records per base
-  - 5GB attachment storage per base
-  - Relational database structure
-  - Cloud-synced with Amazon Web Services infrastructure
+- **PostgreSQL**
+  - Runs on Azure
+  - Stores data for both data management tool and the public web interface
 
-### Secondary Database
-- **PostgreSQL** on Azure
-  - Stores data for public web interface
-  - Synchronized with selected Airtable data
+### Data Management Tool
+- **NocoDB** self hosted as a Container App on Azure
+  - connected to PostgreSQL
+  - Stores data and allows users to make edits
+  - Synchronized with the web app
 
 ## Cloud Infrastructure
 
 - **Microsoft Azure**
   - **Azure Container Apps**: Hosts containerized application components
-  - **Azure Kubernetes Service**: Orchestrates containers for scalability
   - **Azure PostgreSQL**: Managed database service
 
-## Development Tools
-
-- **Airtable API**: For programmatic access to database content
-- **Airtable Scripting Extension**: For metadata collection and automation
-
-## Backup Tools
-
-- **SwitchDrive**: University-provided cloud storage
-- **OneDrive**: Secondary backup location
-- **CSV Export**: Data format for backups
-
-## Security & Compliance
-
-- Airtable Security Features:
-  - ISO/IEC 27001:2013 certification
-  - SOC 2 compliance
-  - GDPR compliance
-  
 ## Web Application
 
 - **Public-facing website**: https://www.cold.global

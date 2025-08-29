@@ -5,94 +5,89 @@ draft: false
 
 # Search Algorithm
 
-We use the PostgreSQL Full Text Search feature to build the search engine, which lets our users query the data in our database.
+CoLD uses PostgreSQL’s built‑in full‑text search to find relevant entries across several parts of the database with a single query.
 
-PostgreSQL, also called Postgres, is a relational database. Relational database means, that data is stored in a structured format, representing tables and columns. Postgres has an integrated feature called "Full Text Search", which allows to query the database and the data entries stored within by using textual queries (as opposed to using Structured Query Language (SQL), which has sophisticated methods of querying databases that are just as manifold in what can be achieved with them as they are complex in handling).
-General functionality
+- You can type normal words (no special operators needed).
+- The search understands common word variations (e.g., decision/decisions, arbitrate/arbitration) and ignores very common words.
+- Results can be narrowed by content type, jurisdiction, or theme in the interface.
 
-The Postgres Full Text Search works by comparing an input document (textual user query) with the data found in the database. It is unfeasible to use the raw data as it would be found in the database directly. Instead, the individual entries from a database table have to be translated into a list of documents. The following preparation steps make it possible to use the Postgres Full Text Search feature:
+## What is searched
+We search multiple content types. For each type, several fields are combined into one searchable text per entry.
 
-1. creating searchable documents
+- Answers:
+  - CoLD ID (e.g., CHE_01.1-P)
+  - Answer
+  - More information
+  - Jurisdictions
+  - Legal families
+  - Linked questions
+  - Themes
 
-Take every row of a table you want to search. Each of these rows has to be turned into a searchable document. To make a row searchable, you first select the columns you deem fit for including their entries in the searchable content. Then, you transform the text into a list of tokens, more specifically: lexemes (basically word stems). This list of lexemes has been cleaned for stop words and each lexeme is complemented with its position in the original text. Imagine you had a sentence "The court has decided on party autonomy and arbitration in Switzerland.". This sentence would be transformed into a list that looks like this: 'arbitr':9 'autonomi':7 'court':2 'decid':4 'parti':6 'switzerland':11
+- HCCH Answers
+  - CoLD ID (e.g., HCCH-01.1-P)
+  - Adapted question
+  - Position
+  - Themes
+  - International instruments
 
-```
-SELECT to_tsvector('The court has decided on party autonomy and arbitration in Switzerland.');
-```
+- Court Decisions
+  - CoLD ID (e.g., CD-CHE-1020)
+  - Case citation
+  - English translation
+  - Jurisdictions
+  - Legal families
+  - Themes (derived from linked questions)
 
-2. parsing textual user queries
+- Domestic Instruments (laws/statutes)
+  - CoLD ID (e.g., DI-CHE-123)
+  - Title (English)
+  - Official title
+  - Relevant provisions
+  - Full text of the provisions
+  - Text from linked Domestic Legal Provisions (original + English translation)
+  - Jurisdictions
+  - Abbreviation
+  - Linked questions
 
-This list can now be used for comparison. To compare it with a textual user query, each query will have to undergo a transformation process similar as in step 1. Searching for "court decision on party autonomy" would thus be turned into 'court' & 'decis' & 'parti' & 'autonomi'. Note that for user queries, the position of words within the original text is not stored.
+- Regional Instruments
+  - CoLD ID (e.g., RI-ABC-10)
+  - Abbreviation
+  - Title
+  - Specialists
+  - Date
 
-```
-SELECT to_tsquery('court & decision & on & party & autonomy');
-```
+- International Instruments
+  - CoLD ID (e.g., II-Hag-20)
+  - Name
+  - Specialists
+  - Date
 
-3. matching documents with queries
+- Literature
+  - CoLD ID (e.g., L-501)
+  - Title
+  - Author
+  - Publication title
+  - Abstract note
+  - Publisher
+  - Jurisdictions
+  - Themes
 
-Finally, we can match the transformed query with all searchable documents in list form available and return whether there is infact a match or not. For some further granularity, we can score each comparison by measuring how relevant each document is to the query. Following the previous examples, matching and ranking the query from step 2 with the searchable document from step 1, returns a ranking score of 0.25948015. Simple comparison:
+Tip: Because the CoLD ID is included in the searchable text, you can paste a code like CD-CHE-1020 to go straight to a specific entry.
 
-```
-SELECT to_tsquery('court & decision & on & party & autonomy') @@ to_tsvector('The court has decided on party autonomy and arbitration in Switzerland.');
-```
+## How results are ordered
+By default, results are ordered by relevance to your words. You can also sort by date (where a meaningful date exists for a content type).
 
-Ranking:
+Additional rules to improve readability:
+- Answers that literally contain “No data” are pushed to the end.
+- Court Decisions with a low “Case Rank” (value 5 or below) are shown after other results but still before “No data” Answers. Within those, higher rank numbers appear first.
 
-```
-SELECT
-    ts_rank(
-        to_tsvector('The court has decided on party autonomy and arbitration in Switzerland.'),
-        to_tsquery('court & decision & on & party & autonomy')
-        --to_tsquery('party & autonomy')
-        )
-```
+## Filters you can use
+- Content type (Answers, HCCH Answers, Court Decisions, Domestic Instruments, Regional Instruments, International Instruments, Literature)
+- Jurisdiction (matches the country names shown in results)
+- Theme (matches the themes shown in results)
 
-## Implementation in CoLD
+## Why your words may still match
+The search uses English stemming. That means word endings are normalized so similar forms match (e.g., “party” ~ “parties”, “decide” ~ “decision/decisions”). Very common words are ignored automatically.
 
-The way in which the Postgres Full Text Search feature has been implemented is by enabling Full Text Search for multiple tables in order to search each of them with the same query. The Full Text Search then returns a joint list of results with data entries from all searched tables in order of how well their ranking score matches the textual user query. Here I am providing an overview for which columns have been selected with which priority for the tables that can be searched using the full text feature. Note that each column to be included for text search can be weighted using weights (A, B, C, D), with A being the highest and D the lowest weight.
-
-1. **"Answers" table**
-- Question (A)
-- Jurisdictions (A)
-- More information (B)
-- Themes (C)
-
-2. **"HCCH Answers" table**
-- Adapted Question (A)
-- International Instruments (A)
-- Themes (B)
-
-2. **"Court decisions" table**
-- Case Citation (A)
-- Jurisdictions (A)
-- English translation (B)
-- Answers Question (C)
-
-3. **"Domestic Instruments" table**
-- Title (in English) (A)
-- Official Title (A)
-- Jurisdictions (B)
-- Publication Date (B)
-- Entry Into Force (B)
-- Full Text of the Provisions (C)
-- Domestic Legal Provisions Full Text of the Provision (Original Language) (C)
-- Domestic Legal Provisions Full Text of the Provision (English Translation) (C)
-
-4. **"Regional Instruments" table**
-- Abbrevation (A)
-- Title (B)
-- Specialists (B)
-- Date (C)
-
-5. **"International Instruments" table**
-- Name (A)
-- Specialists (B)
-- Date (C)
-
-6. **"Literature" table**
-- Title (A)
-- Author (A)
-- Publication Title (B)
-- Publication Year (C)
-
-For every row in each table, the respective combination of the values from all specified columns becomes one searchable document. For each table, the match between search query and searchable documents is made separately. Once the matches and ranks are calculated for each table, they are joined into one list. This list is the final result of the search results.
+## Freshness of results
+Search runs on pre‑built indexes of the data and is refreshed regularly. Recent edits may take a short time to appear in search.

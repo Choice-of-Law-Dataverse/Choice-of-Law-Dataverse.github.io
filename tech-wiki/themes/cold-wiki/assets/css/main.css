@@ -20,3 +20,11 @@ a {
   color: #00e;
   text-decoration: none;
 }
+
+/* Allow long lines in code samples to wrap instead of overflowing */
+.prose pre,
+.prose code {
+  white-space: pre-wrap;      /* wrap instead of only on line breaks */
+  word-wrap: break-word;      /* break long words/URLs */
+  overflow-wrap: anywhere;    /* newer spec, breaks at any opportunity */
+}

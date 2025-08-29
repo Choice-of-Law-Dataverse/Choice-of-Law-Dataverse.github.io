@@ -44,22 +44,20 @@
 <h2 id="database-technologies">Database Technologies</h2>
 <h3 id="primary-data-storage">Primary Data Storage</h3>
 <ul>
-<li><strong>Airtable</strong>
+<li><strong>PostgreSQL</strong>
 <ul>
-<li>Plus Plan subscription</li>
-<li>Capacity for ~15,000 records per base</li>
-<li>5GB attachment storage per base</li>
-<li>Relational database structure</li>
-<li>Cloud-synced with Amazon Web Services infrastructure</li>
+<li>Runs on Azure</li>
+<li>Stores data for both data management tool and the public web interface</li>
 </ul>
 </li>
 </ul>
-<h3 id="secondary-database">Secondary Database</h3>
+<h3 id="data-management-tool">Data Management Tool</h3>
 <ul>
-<li><strong>PostgreSQL</strong> on Azure
+<li><strong>NocoDB</strong> self hosted as a Container App on Azure
 <ul>
-<li>Stores data for public web interface</li>
-<li>Synchronized with selected Airtable data</li>
+<li>connected to PostgreSQL</li>
+<li>Stores data and allows users to make edits</li>
+<li>Synchronized with the web app</li>
 </ul>
 </li>
 </ul>
@@ -68,29 +66,7 @@
 <li><strong>Microsoft Azure</strong>
 <ul>
 <li><strong>Azure Container Apps</strong>: Hosts containerized application components</li>
-<li><strong>Azure Kubernetes Service</strong>: Orchestrates containers for scalability</li>
 <li><strong>Azure PostgreSQL</strong>: Managed database service</li>
-</ul>
-</li>
-</ul>
-<h2 id="development-tools">Development Tools</h2>
-<ul>
-<li><strong>Airtable API</strong>: For programmatic access to database content</li>
-<li><strong>Airtable Scripting Extension</strong>: For metadata collection and automation</li>
-</ul>
-<h2 id="backup-tools">Backup Tools</h2>
-<ul>
-<li><strong>SwitchDrive</strong>: University-provided cloud storage</li>
-<li><strong>OneDrive</strong>: Secondary backup location</li>
-<li><strong>CSV Export</strong>: Data format for backups</li>
-</ul>
-<h2 id="security--compliance">Security &amp; Compliance</h2>
-<ul>
-<li>Airtable Security Features:
-<ul>
-<li>ISO/IEC 27001:2013 certification</li>
-<li>SOC 2 compliance</li>
-<li>GDPR compliance</li>
 </ul>
 </li>
 </ul>
