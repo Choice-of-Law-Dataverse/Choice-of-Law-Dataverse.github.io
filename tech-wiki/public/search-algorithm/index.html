@@ -41,100 +41,113 @@
   
   <div class="content">
     <h1 id="search-algorithm">Search Algorithm</h1>
-<p>We use the PostgreSQL Full Text Search feature to build the search engine, which lets our users query the data in our database.</p>
-<p>PostgreSQL, also called Postgres, is a relational database. Relational database means, that data is stored in a structured format, representing tables and columns. Postgres has an integrated feature called &ldquo;Full Text Search&rdquo;, which allows to query the database and the data entries stored within by using textual queries (as opposed to using Structured Query Language (SQL), which has sophisticated methods of querying databases that are just as manifold in what can be achieved with them as they are complex in handling).
-General functionality</p>
-<p>The Postgres Full Text Search works by comparing an input document (textual user query) with the data found in the database. It is unfeasible to use the raw data as it would be found in the database directly. Instead, the individual entries from a database table have to be translated into a list of documents. The following preparation steps make it possible to use the Postgres Full Text Search feature:</p>
-<ol>
-<li>creating searchable documents</li>
-</ol>
-<p>Take every row of a table you want to search. Each of these rows has to be turned into a searchable document. To make a row searchable, you first select the columns you deem fit for including their entries in the searchable content. Then, you transform the text into a list of tokens, more specifically: lexemes (basically word stems). This list of lexemes has been cleaned for stop words and each lexeme is complemented with its position in the original text. Imagine you had a sentence &ldquo;The court has decided on party autonomy and arbitration in Switzerland.&rdquo;. This sentence would be transformed into a list that looks like this: &lsquo;arbitr&rsquo;:9 &lsquo;autonomi&rsquo;:7 &lsquo;court&rsquo;:2 &lsquo;decid&rsquo;:4 &lsquo;parti&rsquo;:6 &lsquo;switzerland&rsquo;:11</p>
-<pre tabindex="0"><code>SELECT to_tsvector(&#39;The court has decided on party autonomy and arbitration in Switzerland.&#39;);
-</code></pre><ol start="2">
-<li>parsing textual user queries</li>
-</ol>
-<p>This list can now be used for comparison. To compare it with a textual user query, each query will have to undergo a transformation process similar as in step 1. Searching for &ldquo;court decision on party autonomy&rdquo; would thus be turned into &lsquo;court&rsquo; &amp; &lsquo;decis&rsquo; &amp; &lsquo;parti&rsquo; &amp; &lsquo;autonomi&rsquo;. Note that for user queries, the position of words within the original text is not stored.</p>
-<pre tabindex="0"><code>SELECT to_tsquery(&#39;court &amp; decision &amp; on &amp; party &amp; autonomy&#39;);
-</code></pre><ol start="3">
-<li>matching documents with queries</li>
-</ol>
-<p>Finally, we can match the transformed query with all searchable documents in list form available and return whether there is infact a match or not. For some further granularity, we can score each comparison by measuring how relevant each document is to the query. Following the previous examples, matching and ranking the query from step 2 with the searchable document from step 1, returns a ranking score of 0.25948015. Simple comparison:</p>
-<pre tabindex="0"><code>SELECT to_tsquery(&#39;court &amp; decision &amp; on &amp; party &amp; autonomy&#39;) @@ to_tsvector(&#39;The court has decided on party autonomy and arbitration in Switzerland.&#39;);
-</code></pre><p>Ranking:</p>
-<pre tabindex="0"><code>SELECT
-    ts_rank(
-        to_tsvector(&#39;The court has decided on party autonomy and arbitration in Switzerland.&#39;),
-        to_tsquery(&#39;court &amp; decision &amp; on &amp; party &amp; autonomy&#39;)
-        --to_tsquery(&#39;party &amp; autonomy&#39;)
-        )
-</code></pre><h2 id="implementation-in-cold">Implementation in CoLD</h2>
-<p>The way in which the Postgres Full Text Search feature has been implemented is by enabling Full Text Search for multiple tables in order to search each of them with the same query. The Full Text Search then returns a joint list of results with data entries from all searched tables in order of how well their ranking score matches the textual user query. Here I am providing an overview for which columns have been selected with which priority for the tables that can be searched using the full text feature. Note that each column to be included for text search can be weighted using weights (A, B, C, D), with A being the highest and D the lowest weight.</p>
-<ol>
-<li><strong>&ldquo;Answers&rdquo; table</strong></li>
-</ol>
+<p>CoLD uses PostgreSQL’s built‑in full‑text search to find relevant entries across several parts of the database with a single query.</p>
 <ul>
-<li>Question (A)</li>
-<li>Jurisdictions (A)</li>
-<li>More information (B)</li>
-<li>Themes (C)</li>
+<li>You can type normal words (no special operators needed).</li>
+<li>The search understands common word variations (e.g., decision/decisions, arbitrate/arbitration) and ignores very common words.</li>
+<li>Results can be narrowed by content type, jurisdiction, or theme in the interface.</li>
 </ul>
-<ol start="2">
-<li><strong>&ldquo;HCCH Answers&rdquo; table</strong></li>
-</ol>
+<h2 id="what-is-searched">What is searched</h2>
+<p>We search multiple content types. For each type, several fields are combined into one searchable text per entry.</p>
 <ul>
-<li>Adapted Question (A)</li>
-<li>International Instruments (A)</li>
-<li>Themes (B)</li>
-</ul>
-<ol start="2">
-<li><strong>&ldquo;Court decisions&rdquo; table</strong></li>
-</ol>
+<li>
+<p>Answers:</p>
 <ul>
-<li>Case Citation (A)</li>
-<li>Jurisdictions (A)</li>
-<li>English translation (B)</li>
-<li>Answers Question (C)</li>
+<li>CoLD ID (e.g., CHE_01.1-P)</li>
+<li>Answer</li>
+<li>More information</li>
+<li>Jurisdictions</li>
+<li>Legal families</li>
+<li>Linked questions</li>
+<li>Themes</li>
 </ul>
-<ol start="3">
-<li><strong>&ldquo;Domestic Instruments&rdquo; table</strong></li>
-</ol>
+</li>
+<li>
+<p>HCCH Answers</p>
 <ul>
-<li>Title (in English) (A)</li>
-<li>Official Title (A)</li>
-<li>Jurisdictions (B)</li>
-<li>Publication Date (B)</li>
-<li>Entry Into Force (B)</li>
-<li>Full Text of the Provisions (C)</li>
-<li>Domestic Legal Provisions Full Text of the Provision (Original Language) (C)</li>
-<li>Domestic Legal Provisions Full Text of the Provision (English Translation) (C)</li>
+<li>CoLD ID (e.g., HCCH-01.1-P)</li>
+<li>Adapted question</li>
+<li>Position</li>
+<li>Themes</li>
+<li>International instruments</li>
 </ul>
-<ol start="4">
-<li><strong>&ldquo;Regional Instruments&rdquo; table</strong></li>
-</ol>
+</li>
+<li>
+<p>Court Decisions</p>
 <ul>
-<li>Abbrevation (A)</li>
-<li>Title (B)</li>
-<li>Specialists (B)</li>
-<li>Date (C)</li>
+<li>CoLD ID (e.g., CD-CHE-1020)</li>
+<li>Case citation</li>
+<li>English translation</li>
+<li>Jurisdictions</li>
+<li>Legal families</li>
+<li>Themes (derived from linked questions)</li>
 </ul>
-<ol start="5">
-<li><strong>&ldquo;International Instruments&rdquo; table</strong></li>
-</ol>
+</li>
+<li>
+<p>Domestic Instruments (laws/statutes)</p>
 <ul>
-<li>Name (A)</li>
-<li>Specialists (B)</li>
-<li>Date (C)</li>
+<li>CoLD ID (e.g., DI-CHE-123)</li>
+<li>Title (English)</li>
+<li>Official title</li>
+<li>Relevant provisions</li>
+<li>Full text of the provisions</li>
+<li>Text from linked Domestic Legal Provisions (original + English translation)</li>
+<li>Jurisdictions</li>
+<li>Abbreviation</li>
+<li>Linked questions</li>
 </ul>
-<ol start="6">
-<li><strong>&ldquo;Literature&rdquo; table</strong></li>
-</ol>
+</li>
+<li>
+<p>Regional Instruments</p>
 <ul>
-<li>Title (A)</li>
-<li>Author (A)</li>
-<li>Publication Title (B)</li>
-<li>Publication Year (C)</li>
+<li>CoLD ID (e.g., RI-ABC-10)</li>
+<li>Abbreviation</li>
+<li>Title</li>
+<li>Specialists</li>
+<li>Date</li>
 </ul>
-<p>For every row in each table, the respective combination of the values from all specified columns becomes one searchable document. For each table, the match between search query and searchable documents is made separately. Once the matches and ranks are calculated for each table, they are joined into one list. This list is the final result of the search results.</p>
+</li>
+<li>
+<p>International Instruments</p>
+<ul>
+<li>CoLD ID (e.g., II-Hag-20)</li>
+<li>Name</li>
+<li>Specialists</li>
+<li>Date</li>
+</ul>
+</li>
+<li>
+<p>Literature</p>
+<ul>
+<li>CoLD ID (e.g., L-501)</li>
+<li>Title</li>
+<li>Author</li>
+<li>Publication title</li>
+<li>Abstract note</li>
+<li>Publisher</li>
+<li>Jurisdictions</li>
+<li>Themes</li>
+</ul>
+</li>
+</ul>
+<p>Tip: Because the CoLD ID is included in the searchable text, you can paste a code like CD-CHE-1020 to go straight to a specific entry.</p>
+<h2 id="how-results-are-ordered">How results are ordered</h2>
+<p>By default, results are ordered by relevance to your words. You can also sort by date (where a meaningful date exists for a content type).</p>
+<p>Additional rules to improve readability:</p>
+<ul>
+<li>Answers that literally contain “No data” are pushed to the end.</li>
+<li>Court Decisions with a low “Case Rank” (value 5 or below) are shown after other results but still before “No data” Answers. Within those, higher rank numbers appear first.</li>
+</ul>
+<h2 id="filters-you-can-use">Filters you can use</h2>
+<ul>
+<li>Content type (Answers, HCCH Answers, Court Decisions, Domestic Instruments, Regional Instruments, International Instruments, Literature)</li>
+<li>Jurisdiction (matches the country names shown in results)</li>
+<li>Theme (matches the themes shown in results)</li>
+</ul>
+<h2 id="why-your-words-may-still-match">Why your words may still match</h2>
+<p>The search uses English stemming. That means word endings are normalized so similar forms match (e.g., “party” ~ “parties”, “decide” ~ “decision/decisions”). Very common words are ignored automatically.</p>
+<h2 id="freshness-of-results">Freshness of results</h2>
+<p>Search runs on pre‑built indexes of the data and is refreshed regularly. Recent edits may take a short time to appear in search.</p>
 
   </div>
 </main>

@@ -14,41 +14,63 @@ CoLD uses PostgreSQL’s built‑in full‑text search to find relevant entries 
 ## What is searched
 We search multiple content types. For each type, several fields are combined into one searchable text per entry.
 
-- Answers
-  - Answer, More information
-  - Jurisdictions, Legal families
-  - Linked questions, Themes
+- Answers:
   - CoLD ID (e.g., CHE_01.1-P)
+  - Answer
+  - More information
+  - Jurisdictions
+  - Legal families
+  - Linked questions
+  - Themes
 
 - HCCH Answers
-  - Adapted question, Position
-  - Themes, International instruments
   - CoLD ID (e.g., HCCH-01.1-P)
+  - Adapted question
+  - Position
+  - Themes
+  - International instruments
 
 - Court Decisions
-  - Case citation, English translation
-  - Jurisdictions, Legal families
-  - Themes (derived from linked questions)
   - CoLD ID (e.g., CD-CHE-1020)
+  - Case citation
+  - English translation
+  - Jurisdictions
+  - Legal families
+  - Themes (derived from linked questions)
 
 - Domestic Instruments (laws/statutes)
-  - Title (English), Official title, Relevant provisions, Full text of the provisions
-  - Text from linked Domestic Legal Provisions (original + English translation)
-  - Jurisdictions, Abbreviation, Linked questions
   - CoLD ID (e.g., DI-CHE-123)
+  - Title (English)
+  - Official title
+  - Relevant provisions
+  - Full text of the provisions
+  - Text from linked Domestic Legal Provisions (original + English translation)
+  - Jurisdictions
+  - Abbreviation
+  - Linked questions
 
 - Regional Instruments
-  - Abbreviation, Title, Specialists, Date
   - CoLD ID (e.g., RI-ABC-10)
+  - Abbreviation
+  - Title
+  - Specialists
+  - Date
 
 - International Instruments
-  - Name, Specialists, Date
   - CoLD ID (e.g., II-Hag-20)
+  - Name
+  - Specialists
+  - Date
 
 - Literature
-  - Title, Author, Publication title, Abstract note, Publisher
-  - Jurisdictions, Themes
   - CoLD ID (e.g., L-501)
+  - Title
+  - Author
+  - Publication title
+  - Abstract note
+  - Publisher
+  - Jurisdictions
+  - Themes
 
 Tip: Because the CoLD ID is included in the searchable text, you can paste a code like CD-CHE-1020 to go straight to a specific entry.
 

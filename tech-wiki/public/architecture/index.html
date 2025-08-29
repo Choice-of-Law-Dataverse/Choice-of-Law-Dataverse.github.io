@@ -47,14 +47,13 @@
 <li>
 <p><strong>Data Layer</strong>:</p>
 <ul>
-<li>Primary data storage in Airtable cloud database</li>
-<li>PostgreSQL database for the public-facing web application</li>
+<li>PostgreSQL database for data storage and direct integration with NocoDB and web app</li>
 </ul>
 </li>
 <li>
 <p><strong>Application Layer</strong>:</p>
 <ul>
-<li>API interface to Airtable for data management</li>
+<li>API interface to PostgreSQL</li>
 <li>Custom web application for public access</li>
 <li>Container-based microservices for specific functionality</li>
 </ul>
@@ -62,22 +61,15 @@
 <li>
 <p><strong>Presentation Layer</strong>:</p>
 <ul>
-<li>Web interface accessible at cold.global</li>
-<li>Administrative interface for research team</li>
+<li>Web interface accessible at <a href="https://cold.global">https://cold.global</a></li>
+<li>Administrative interface for research team (NocoDB)</li>
 </ul>
 </li>
 </ol>
 <h2 id="database-architecture">Database Architecture</h2>
 <p>The system uses a relational database model with multiple interconnected tables. The database structure is organized to represent relationships between different legal concepts and objects through linked record fields.</p>
 <h3 id="key-components">Key Components</h3>
-<p>Airtable Base &ndash;&gt; PostgreSQL DB &ndash;&gt; FastAPI Backend &ndash;&gt; Public Facing Nuxt.js Frontend</p>
-<h2 id="backup-system">Backup System</h2>
-<ul>
-<li>Regular exports from Airtable to CSV format</li>
-<li>Storage of backups on SwitchDrive and OneDrive</li>
-<li>Automated backup procedures for data consistency</li>
-<li>Retention of historical data for at least five years</li>
-</ul>
+<p>NocoDB &ndash;&gt; PostgreSQL DB &ndash;&gt; FastAPI Backend &ndash;&gt; Public Facing Nuxt.js Frontend</p>
 
   </div>
 </main>

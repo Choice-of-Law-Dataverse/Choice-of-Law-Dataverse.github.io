@@ -46,30 +46,17 @@
 <ul>
 <li><strong>Web Application</strong>: Accessible at <a href="https://www.cold.global">https://www.cold.global</a></li>
 <li><strong>Database</strong>: PostgreSQL instance on Azure</li>
-<li><strong>Container Orchestration</strong>: Azure Kubernetes Service</li>
 <li><strong>Application Hosting</strong>: Azure Container Apps</li>
 </ul>
 <h2 id="deployment-process">Deployment Process</h2>
-<p>While specific deployment processes are not detailed in the data management plan, the following general workflow can be inferred:</p>
 <ol>
-<li>Data is maintained in Airtable</li>
-<li>Selected data is synchronized to the PostgreSQL database</li>
+<li>Data is maintained in NocoDB</li>
+<li>Data is permanently synchronized to the PostgreSQL database</li>
 <li>Web application containers are deployed to Azure</li>
 <li>Updates to the web application are managed through Azure&rsquo;s deployment tools</li>
 </ol>
 <h2 id="backup-procedures">Backup Procedures</h2>
-<p>Regular backup procedures have been established:</p>
-<ol>
-<li><strong>Weekly Exports</strong>: CSV exports from Airtable</li>
-<li><strong>Storage</strong>: Backups are stored on:
-<ul>
-<li>University of Lucerne network server</li>
-<li>SwitchDrive</li>
-<li>OneDrive</li>
-</ul>
-</li>
-<li><strong>Automation</strong>: An automated process has been implemented for consistent backups</li>
-</ol>
+<p>Regular backup procedures have been established through the built-in backup tools within the Azure flexible server for PostgreSQL</p>
 <h2 id="environment-management">Environment Management</h2>
 <h3 id="production">Production</h3>
 <ul>
@@ -77,7 +64,7 @@
 </ul>
 <h3 id="developmentstaging">Development/Staging</h3>
 <ul>
-<li>Not explicitly mentioned in the DMP, but implied through development workflow</li>
+<li>only one website version is live. The state of code on the gitub repository&rsquo;s branch &ldquo;prod&rdquo; is automatically connected to the deployment via CI/CD</li>
 </ul>
 <h2 id="access-management">Access Management</h2>
 <ul>
@@ -87,7 +74,7 @@
 </ul>
 <h2 id="monitoring">Monitoring</h2>
 <ul>
-<li>Airtable provides activity tracking and revision history for up to six months</li>
+<li>NocoDB provides activity tracking and revision history for up to six months</li>
 <li>Record-level change tracking shows who made changes and what was modified</li>
 </ul>
 
