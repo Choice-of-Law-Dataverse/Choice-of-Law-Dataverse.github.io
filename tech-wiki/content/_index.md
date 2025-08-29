@@ -7,7 +7,7 @@ draft: false
 
 ## Project Background
 
-The Choice Of Law Database (COLD) platform is built upon data collected during the SNSF research project "The Hague Principles and Beyond." Starting with approximately 5,363 data points, the database has expanded to include around 17,509 data points of relevant case law decisions and conflict of laws rules from jurisdictions across all continents.
+The Choice Of Law Database (COLD) platform is built upon data collected during the SNSF research project "The Hague Principles and Beyond." Starting with approximately 5,363 data points, the database has expanded to include over 17,000 data points of relevant case law decisions and conflict of laws rules from jurisdictions across all continents.
 
 ## System Purpose
 
